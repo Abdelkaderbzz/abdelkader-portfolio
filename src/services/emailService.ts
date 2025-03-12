@@ -1,5 +1,7 @@
+import { toast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
-import { toast } from "@/hooks/use-toast";
+
 
 export interface EmailData {
   name: string;
@@ -7,35 +9,40 @@ export interface EmailData {
   message: string;
 }
 
-// This service handles sending emails from the contact form
+// This service handles sending emails from the contact form using EmailJS
 export const sendEmail = async (data: EmailData): Promise<boolean> => {
   try {
-    // In a real application, this would be an API call to your backend
-    // For demonstration purposes, we're simulating an API call
-    console.log("Sending email with data:", data);
-    
-    // Simulate network request
-    const response = await new Promise<Response>((resolve) => {
-      setTimeout(() => {
-        resolve(new Response(JSON.stringify({ success: true }), { 
-          status: 200, 
-          headers: { 'Content-Type': 'application/json' }
-        }));
-      }, 1500);
-    });
-    
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to send email");
+    const serviceId = 'service_j90w64l';
+    const templateId = 'template_iz0ngd5';
+    const userId = 'oeWUyaKds4GrFt9F3';
+
+    const templateParams = {
+      from_name: data.name,
+      from_email: data.email,
+      message: data.message,
+    };
+
+    const response = await emailjs.send(
+      serviceId,
+      templateId,
+      templateParams,
+      userId
+    );
+
+    if (response.status !== 200) {
+      throw new Error('Failed to send email');
     }
-    
+
     return true;
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error('Error sending email:', error);
     toast({
-      title: "Error",
-      description: error instanceof Error ? error.message : "Failed to send your message. Please try again.",
-      variant: "destructive",
+      title: 'Error',
+      description:
+        error instanceof Error
+          ? error.message
+          : 'Failed to send your message. Please try again.',
+      variant: 'destructive',
     });
     return false;
   }
