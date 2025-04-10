@@ -209,6 +209,10 @@ export const skillsData: SkillCategory[] = [
       'Vue.js',
       'Next.js',
       'Tailwind CSS',
+      'Zustand',
+      'React Query',
+      'Redux Toolkit',
+      'SCSS',
     ],
   },
   {
@@ -225,7 +229,15 @@ export const skillsData: SkillCategory[] = [
   {
     name: 'Backend & Database',
     icon: Database,
-    skills: ['Node.js', 'Express', 'MongoDB', 'Firebase', 'SQL Basics'],
+    skills: [
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'Firebase',
+      'SQL Basics',
+      'Supabase',
+      'Strapi',
+    ],
   },
   {
     name: 'Version Control',
