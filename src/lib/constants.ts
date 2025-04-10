@@ -144,6 +144,28 @@ export const projectsData: Project[] = [
   },
   {
     id: 2,
+    title: 'neuroreset',
+    description:
+      'NeuroReset is an AI-powered addiction recovery platform that provides personalized recovery plans, daily tasks, and community support. It helps users track progress, stay motivated, and build healthier habits.',
+    tags: [
+      'TypeScript',
+      'Next.js',
+      'Zustand',
+      'Tailwind CSS',
+      'Radix UI',
+      'Supabase',
+    ],
+    images: [
+      '/images/p4-img3.png',
+      '/images/p4-img4.png',
+      '/images/p4-img1.png',
+      '/images/p4-img2.png',
+    ],
+    link: 'https://neuroreset.netlify.app/',
+    github: 'https://github.com/Abdelkaderbzz/neuroreset',
+  },
+  {
+    id: 3,
     title: 'Ramadan Tracker',
     description:
       'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
@@ -159,7 +181,7 @@ export const projectsData: Project[] = [
     github: 'https://github.com/Abdelkaderbzz/ramadan-tracker/tree/develop',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Doctor Dashboard',
     description:
       'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
