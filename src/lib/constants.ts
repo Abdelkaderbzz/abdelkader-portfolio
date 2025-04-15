@@ -194,6 +194,19 @@ export const projectsData: Project[] = [
     link: 'https://doctor-dashboard-ivory.vercel.app/',
     github: 'https://github.com/Abdelkaderbzz/doctorDashboard/tree/develop',
   },
+  {
+    id: 5,
+    title: 'Shopping Card',
+    description:
+      'A modern, responsive e-commerce product page built for a shoe brand called Sneakers. It allows users to view product details, select the quantity, and add items to their shopping cart.',
+    tags: ['html', 'css', 'javascript'],
+    images: [
+      '/images/p5-img2.png',
+      '/images/p5-img1.png',
+
+    ],
+    link: 'https://shppingcarditem.netlify.app/',
+  },
 ];
 
 export const skillsData: SkillCategory[] = [
