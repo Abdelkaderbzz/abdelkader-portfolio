@@ -269,7 +269,7 @@ export const projectsData: Project[] = [
     id: 4,
     title: 'Doctor Dashboard',
     description:
-    'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
+      'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     images: [
       '/images/projects/p2-img2.png',
@@ -283,7 +283,7 @@ export const projectsData: Project[] = [
     id: 5,
     title: 'onq',
     description:
-    'onQ is an innovative chat application that enables real-time messaging, group creation, and event management, streamlining communication and organization for users.',
+      'onQ is an innovative chat application that enables real-time messaging, group creation, and event management, streamlining communication and organization for users.',
     tags: [
       'typescript',
       'reactjs',
@@ -301,7 +301,7 @@ export const projectsData: Project[] = [
       '/images/projects/p6-img4.png',
       '/images/projects/p6-img5.png',
     ],
-    link: 'onq.life',
+    link: 'https://onq.life/login',
     github: 'https://github.com/Abdelkaderbzz/onQ/tree/develop',
   },
   {
