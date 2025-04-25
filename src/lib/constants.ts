@@ -134,7 +134,23 @@ export const projectsData: Project[] = [
     title: 'Custom Service Platform',
     description:
       'Scalable customer support service with real-time messaging, personalized product tours, dynamic banners, custom popups, and targeted content. Supports team collaboration, permission management, and automated notifications.',
-    tags: ['TypeScript', 'React', 'SCSS', 'Ant Design'],
+    tags: [
+      'typescript',
+      'reactjs',
+      'scss',
+      'antd',
+      'nodejs',
+      'socket.io',
+      'kafka',
+      'express',
+      'mongodb',
+      'java',
+      'microservices',
+      'go',
+      'redis',
+      'docker',
+      'docker compose',
+    ],
     images: [
       '/images/p1-img3.png',
       '/images/p1-img1.png',
@@ -182,25 +198,9 @@ export const projectsData: Project[] = [
   },
   {
     id: 4,
-    title: 'Ramadan Tracker',
-    description:
-      'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
-    tags: ['React.js', 'Vite', 'Zustand', 'Tailwind CSS', 'React Query'],
-    images: [
-      '/images/p3-img1.png',
-      '/images/p3-img2.png',
-      '/images/p3-img3.png',
-      '/images/p3-img4.png',
-      '/images/p3-img5.png',
-    ],
-    link: 'https://ramadhan-tracker.netlify.app/',
-    github: 'https://github.com/Abdelkaderbzz/ramadan-tracker/tree/develop',
-  },
-  {
-    id: 5,
     title: 'Doctor Dashboard',
     description:
-      'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
+    'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     images: [
       '/images/4df012e5-f35d-4f4c-97a0-d551837fe5e5.png',
@@ -211,16 +211,37 @@ export const projectsData: Project[] = [
     github: 'https://github.com/Abdelkaderbzz/doctorDashboard/tree/develop',
   },
   {
+    id: 5,
+    title: 'onq',
+    description:
+    'onQ is an innovative chat application that enables real-time messaging, group creation, and event management, streamlining communication and organization for users.',
+    tags: [
+      'typescript',
+      'reactjs',
+      'scss',
+      'antd',
+      'nodejs',
+      'socket.io',
+      'express',
+      'mongodb',
+    ],
+    images: [
+      '/images/p6-img1.png',
+      '/images/p6-img2.png',
+      '/images/p6-img3.png',
+      '/images/p6-img4.png',
+      '/images/p6-img5.png',
+    ],
+    link: 'onq.life',
+    github: 'https://github.com/Abdelkaderbzz/onQ/tree/develop',
+  },
+  {
     id: 6,
     title: 'Shopping Card',
     description:
       'A modern, responsive e-commerce product page built for a shoe brand called Sneakers. It allows users to view product details, select the quantity, and add items to their shopping cart.',
     tags: ['html', 'css', 'javascript'],
-    images: [
-      '/images/p5-img2.png',
-      '/images/p5-img1.png',
-
-    ],
+    images: ['/images/p5-img2.png', '/images/p5-img1.png'],
     link: 'https://shppingcarditem.netlify.app/',
   },
 ];
