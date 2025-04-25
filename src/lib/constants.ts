@@ -182,6 +182,22 @@ export const projectsData: Project[] = [
   },
   {
     id: 4,
+    title: 'Ramadan Tracker',
+    description:
+      'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
+    tags: ['React.js', 'Vite', 'Zustand', 'Tailwind CSS', 'React Query'],
+    images: [
+      '/images/p3-img1.png',
+      '/images/p3-img2.png',
+      '/images/p3-img3.png',
+      '/images/p3-img4.png',
+      '/images/p3-img5.png',
+    ],
+    link: 'https://ramadhan-tracker.netlify.app/',
+    github: 'https://github.com/Abdelkaderbzz/ramadan-tracker/tree/develop',
+  },
+  {
+    id: 5,
     title: 'Doctor Dashboard',
     description:
       'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
@@ -195,7 +211,7 @@ export const projectsData: Project[] = [
     github: 'https://github.com/Abdelkaderbzz/doctorDashboard/tree/develop',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Shopping Card',
     description:
       'A modern, responsive e-commerce product page built for a shoe brand called Sneakers. It allows users to view product details, select the quantity, and add items to their shopping cart.',
