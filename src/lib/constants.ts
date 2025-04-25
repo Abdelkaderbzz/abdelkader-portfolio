@@ -36,7 +36,76 @@ export interface Education {
   location: string;
   period: string;
 }
+interface Article {
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+  date: string;
+  platform: 'medium' | 'devto';
+  image: string;
+  readTime: string;
+  likes?: number;
+  comments?: number;
+  author?: {
+    name: string;
+    image: string;
+  };
+}
 
+export const articles: Article[] = [
+  {
+    id: '1',
+    title: 'Exploring Shadow Root Use Cases and Its Utility in Web Development',
+    description:
+      'An in-depth exploration of Shadow DOM and its role in creating encapsulated components. Learn how Shadow Root can improve modularity and styling isolation in modern web applications.',
+    link: 'https://medium.com/@bouzomitaabdelkader2004/exploring-shadow-root-use-cases-and-its-utility-in-web-development-71062b2cb1dc',
+    date: 'Mar 21',
+    platform: 'medium',
+    image: '/images/articles/article1.png',
+    readTime: '6 min read',
+    likes: 1700,
+    comments: 53,
+    author: {
+      name: 'Abdelkader bzz',
+      image: '/images/rounded.png',
+    },
+  },
+  {
+    id: '2',
+    title: 'How to Create and Publish Your Own NPM Package',
+    description:
+      'A step-by-step guide to building, testing, and publishing your own NPM package. Learn how to set up your project, write clean documentation, and share your code with the JavaScript community.',
+    link: 'https://medium.com/@bouzomitaabdelkader2004/how-to-create-and-publish-your-own-npm-package-16b24bd0c0ab',
+    date: 'Jun 22',
+    platform: 'devto',
+    image: '/images/articles/article2.png',
+    readTime: '8 min read',
+    likes: 450,
+    comments: 32,
+    author: {
+      name: 'Abdelkader bzz',
+      image: '/images/rounded.png',
+    },
+  },
+  {
+    id: '3',
+    title: 'Building Efficient APIs with GraphQL: A Practical Guide',
+    description:
+      'Discover how GraphQL can revolutionize your API development. This article covers schema design, resolvers, query optimization, and implementing GraphQL in both client and server applications.',
+    link: 'https://medium.com/your-username/your-article',
+    date: 'Jul 10',
+    platform: 'medium',
+    image: '/images/articles/article3.png',
+    readTime: '5 min read',
+    likes: 890,
+    comments: 41,
+    author: {
+      name: 'Abdelkader bzz',
+      image: '/images/rounded.png',
+    },
+  },
+];
 export const personalInfo = {
   name: 'Abdelkader Bouzomita',
   title: 'Frontend Developer',
@@ -134,11 +203,27 @@ export const projectsData: Project[] = [
     title: 'Custom Service Platform',
     description:
       'Scalable customer support service with real-time messaging, personalized product tours, dynamic banners, custom popups, and targeted content. Supports team collaboration, permission management, and automated notifications.',
-    tags: ['TypeScript', 'React', 'SCSS', 'Ant Design'],
+    tags: [
+      'typescript',
+      'reactjs',
+      'scss',
+      'antd',
+      'nodejs',
+      'socket.io',
+      'kafka',
+      'express',
+      'mongodb',
+      'java',
+      'microservices',
+      'go',
+      'redis',
+      'docker',
+      'docker compose',
+    ],
     images: [
-      '/images/p1-img3.png',
-      '/images/p1-img1.png',
-      '/images/p1-img2.png',
+      '/images/projects/p1-img3.png',
+      '/images/projects/p1-img1.png',
+      '/images/projects/p1-img2.png',
     ],
     link: 'https://popupsv2.softylines.com/login',
   },
@@ -156,10 +241,10 @@ export const projectsData: Project[] = [
       'Supabase',
     ],
     images: [
-      '/images/p4-img3.png',
-      '/images/p4-img4.png',
-      '/images/p4-img1.png',
-      '/images/p4-img2.png',
+      '/images/projects/p4-img3.png',
+      '/images/projects/p4-img4.png',
+      '/images/projects/p4-img1.png',
+      '/images/projects/p4-img2.png',
     ],
     link: 'https://neuroreset.netlify.app/',
     github: 'https://github.com/Abdelkaderbzz/neuroreset',
@@ -171,11 +256,11 @@ export const projectsData: Project[] = [
       'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
     tags: ['React.js', 'Vite', 'Zustand', 'Tailwind CSS', 'React Query'],
     images: [
-      '/images/p3-img1.png',
-      '/images/p3-img2.png',
-      '/images/p3-img3.png',
-      '/images/p3-img4.png',
-      '/images/p3-img5.png',
+      '/images/projects/p3-img1.png',
+      '/images/projects/p3-img2.png',
+      '/images/projects/p3-img3.png',
+      '/images/projects/p3-img4.png',
+      '/images/projects/p3-img5.png',
     ],
     link: 'https://ramadhan-tracker.netlify.app/',
     github: 'https://github.com/Abdelkaderbzz/ramadan-tracker/tree/develop',
@@ -184,27 +269,48 @@ export const projectsData: Project[] = [
     id: 4,
     title: 'Doctor Dashboard',
     description:
-      'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
+    'A back-office web application for therapy doctors to efficiently manage their patients and schedule meetings. Provides an intuitive dashboard to track patient progress, view appointments, and integrate with calendar systems.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     images: [
-      '/images/4df012e5-f35d-4f4c-97a0-d551837fe5e5.png',
-      '/images/p2-img1.png',
-      '/images/5b1dd34e-628c-41e0-8df3-8d25d5f1b8ce.png',
+      '/images/projects/p2-img2.png',
+      '/images/projects/p2-img1.png',
+      '/images/projects/p2-img3.png',
     ],
     link: 'https://doctor-dashboard-ivory.vercel.app/',
     github: 'https://github.com/Abdelkaderbzz/doctorDashboard/tree/develop',
   },
   {
     id: 5,
+    title: 'onq',
+    description:
+    'onQ is an innovative chat application that enables real-time messaging, group creation, and event management, streamlining communication and organization for users.',
+    tags: [
+      'typescript',
+      'reactjs',
+      'scss',
+      'antd',
+      'nodejs',
+      'socket.io',
+      'express',
+      'mongodb',
+    ],
+    images: [
+      '/images/projects/p6-img1.png',
+      '/images/projects/p6-img2.png',
+      '/images/projects/p6-img3.png',
+      '/images/projects/p6-img4.png',
+      '/images/projects/p6-img5.png',
+    ],
+    link: 'onq.life',
+    github: 'https://github.com/Abdelkaderbzz/onQ/tree/develop',
+  },
+  {
+    id: 6,
     title: 'Shopping Card',
     description:
       'A modern, responsive e-commerce product page built for a shoe brand called Sneakers. It allows users to view product details, select the quantity, and add items to their shopping cart.',
     tags: ['html', 'css', 'javascript'],
-    images: [
-      '/images/p5-img2.png',
-      '/images/p5-img1.png',
-
-    ],
+    images: ['/images/projects/p5-img2.png', '/images/projects/p5-img1.png'],
     link: 'https://shppingcarditem.netlify.app/',
   },
 ];
