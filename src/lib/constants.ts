@@ -305,6 +305,21 @@ export const projectsData: Project[] = [
     github: 'https://github.com/Abdelkaderbzz/onQ/tree/develop',
   },
   {
+    id: 5,
+    title: 'chronomanager',
+    description:
+      'An intuitive task management app featuring folders, lists, drag-and-drop, and three powerful views: Kanban, Priority, and List — designed to keep you organized and in control.',
+    tags: ['typescript', 'nextjs', 'tailwind', 'shadcn', 'react-beautiful-dnd'],
+    images: [
+      '/images/projects/p7-img1.png',
+      '/images/projects/p7-img2.png',
+      '/images/projects/p7-img3.png',
+      '/images/projects/p7-img4.png',
+    ],
+    link: 'https://chronomanager.netlify.app/',
+    github: 'https://github.com/Abdelkaderbzz/taskly/tree/develop',
+  },
+  {
     id: 6,
     title: 'Shopping Card',
     description:
