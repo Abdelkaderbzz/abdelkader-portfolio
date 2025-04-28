@@ -1,12 +1,44 @@
 'use client';
 
 import { useAnimateOnScroll, useStaggeredAnimation } from '@/lib/animations';
+import { contentfulClient } from '@/lib/contentfulClient';
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import * as contentful from 'contentful';
 
-// Create a separate ProjectCard component to fix the hooks issue
-const ProjectCard = ({ project, animStyle }) => {
+
+// Types
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  images: Array<{
+    fields: {
+      file: {
+        url: string;
+      };
+    };
+  }>;
+  link: string;
+  github?: string;
+  tags: string[];
+}
+
+interface ProjectsProps {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  projects?: Project[];
+  className?: string;
+}
+
+// Create a separate ProjectCard component
+const ProjectCard = ({
+  project,
+  animStyle,
+}: {
+  project: Project;
+  animStyle?: React.CSSProperties;
+}) => {
   const { isVisible, ref } = useAnimateOnScroll({ threshold: 0.1 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -143,24 +175,35 @@ const ProjectCard = ({ project, animStyle }) => {
   );
 };
 
-const Projects = () => {
-  const [projectData, setProjetsData] = useState([]);
+const Projects = ({
+  title = 'Projects',
+  subtitle = 'Selected Work',
+  description = 'Here are some of my recent projects that showcase my skills and expertise.',
+  projects: initialProjects,
+  className = '',
+}: ProjectsProps) => {
+  const [projects, setProjects] = useState<Project[]>(initialProjects || []);
   const { isVisible: headerVisible, ref: headerRef } = useAnimateOnScroll();
-  const projectAnimItems = useStaggeredAnimation(projectData.length, 0.1);
-  console.log(projectData);
-  const client = contentful.createClient({
-    space: '3k73j1bqwg64',
-    environment: 'master', // defaults to 'master' if not set
-    accessToken: 'EyZ_Ynxs4P1R-hj1jM_WR63P8b9YR-coGhyfRcSRF7Q',
-  });
+  const projectAnimItems = useStaggeredAnimation(projects.length, 0.1);
+
   useEffect(() => {
-    client
-      .getEntries({ content_type: 'project' })
-      .then((entry) => setProjetsData(entry?.items))
-      .catch(console.error);
-  }, []);
+      contentfulClient
+        .getEntries({ content_type: 'project' })
+        .then((response) => {
+          const items = response.items.map((item) => {
+            const fields = item.fields as unknown as Project;
+            return {
+              id: item.sys.id,
+              ...fields,
+            };
+          });
+          setProjects(items);
+        })
+        .catch(console.error);
+  }, [ initialProjects]);
+
   return (
-    <section id='projects' className='section-padding'>
+    <section id='projects' className={`section-padding ${className}`}>
       <div className='container-tight'>
         <div
           ref={headerRef}
@@ -169,26 +212,22 @@ const Projects = () => {
           }`}
         >
           <h2 className='text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2'>
-            Projects
+            {title}
           </h2>
-          <h3 className='text-3xl md:text-4xl font-bold mb-4'>Selected Work</h3>
+          <h3 className='text-3xl md:text-4xl font-bold mb-4'>{subtitle}</h3>
           <p className='text-muted-foreground max-w-2xl mx-auto'>
-            Here are some of my recent projects that showcase my skills and
-            expertise.
+            {description}
           </p>
         </div>
 
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
-          {[...projectData].reverse().map((el, index) => {
-            const project = el.fields;
-            return (
-              <ProjectCard
-                key={project.id || index}
-                project={project}
-                animStyle={projectAnimItems[index]?.style}
-              />
-            );
-          })}
+          {[...projects].reverse().map((project, index) => (
+            <ProjectCard
+              key={project.id || index}
+              project={project}
+              animStyle={projectAnimItems[index]?.style}
+            />
+          ))}
         </div>
       </div>
     </section>

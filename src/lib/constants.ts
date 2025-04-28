@@ -36,76 +36,8 @@ export interface Education {
   location: string;
   period: string;
 }
-interface Article {
-  id: string;
-  title: string;
-  description: string;
-  link: string;
-  date: string;
-  platform: 'medium' | 'devto';
-  image: string;
-  readTime: string;
-  likes?: number;
-  comments?: number;
-  author?: {
-    name: string;
-    image: string;
-  };
-}
 
-export const articles: Article[] = [
-  {
-    id: '1',
-    title: 'Exploring Shadow Root Use Cases and Its Utility in Web Development',
-    description:
-      'An in-depth exploration of Shadow DOM and its role in creating encapsulated components. Learn how Shadow Root can improve modularity and styling isolation in modern web applications.',
-    link: 'https://medium.com/@bouzomitaabdelkader2004/exploring-shadow-root-use-cases-and-its-utility-in-web-development-71062b2cb1dc',
-    date: 'Mar 21',
-    platform: 'medium',
-    image: '/images/articles/article1.png',
-    readTime: '6 min read',
-    likes: 1700,
-    comments: 53,
-    author: {
-      name: 'Abdelkader bzz',
-      image: '/images/rounded.png',
-    },
-  },
-  {
-    id: '2',
-    title: 'How to Create and Publish Your Own NPM Package',
-    description:
-      'A step-by-step guide to building, testing, and publishing your own NPM package. Learn how to set up your project, write clean documentation, and share your code with the JavaScript community.',
-    link: 'https://medium.com/@bouzomitaabdelkader2004/how-to-create-and-publish-your-own-npm-package-16b24bd0c0ab',
-    date: 'Jun 22',
-    platform: 'devto',
-    image: '/images/articles/article2.png',
-    readTime: '8 min read',
-    likes: 450,
-    comments: 32,
-    author: {
-      name: 'Abdelkader bzz',
-      image: '/images/rounded.png',
-    },
-  },
-  {
-    id: '3',
-    title: 'Building Efficient APIs with GraphQL: A Practical Guide',
-    description:
-      'Discover how GraphQL can revolutionize your API development. This article covers schema design, resolvers, query optimization, and implementing GraphQL in both client and server applications.',
-    link: 'https://medium.com/your-username/your-article',
-    date: 'Jul 10',
-    platform: 'medium',
-    image: '/images/articles/article3.png',
-    readTime: '5 min read',
-    likes: 890,
-    comments: 41,
-    author: {
-      name: 'Abdelkader bzz',
-      image: '/images/rounded.png',
-    },
-  },
-];
+
 export const personalInfo = {
   name: 'Abdelkader Bouzomita',
   title: 'Frontend Developer',
