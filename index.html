@@ -1,27 +1,71 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abdelkader Bouzomita | Frontend Developer</title>
-    <meta name="description" content="Portfolio website of Abdelkader Bouzomita, a frontend developer specializing in creating clean, responsive, and user-focused web experiences." />
+    <meta
+      name="description"
+      content="Portfolio website of Abdelkader Bouzomita, a frontend developer specializing in creating clean, responsive, and user-focused web experiences."
+    />
     <meta name="author" content="Abdelkader Bouzomita" />
     <meta property="og:image" content="/og-image.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-      <link rel="icon" href="/public/images/rounded.png" type="image/png" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/public/images/rounded.png" type="image/png" />
   </head>
 
   <body>
     <div id="root"></div>
     <script>
-      (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="DTbtG0rbB6Pu4AiZFzZO_";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-      </script>
+      (function () {
+        if (!window.chatbase || window.chatbase('getState') !== 'initialized') {
+          window.chatbase = (...arguments) => {
+            if (!window.chatbase.q) {
+              window.chatbase.q = [];
+            }
+            window.chatbase.q.push(arguments);
+          };
+          window.chatbase = new Proxy(window.chatbase, {
+            get(target, prop) {
+              if (prop === 'q') {
+                return target.q;
+              }
+              return (...args) => target(prop, ...args);
+            },
+          });
+        }
+        const onLoad = function () {
+          const script = document.createElement('script');
+          script.src = 'https://www.chatbase.co/embed.min.js';
+          script.id = 'DTbtG0rbB6Pu4AiZFzZO_';
+          script.domain = 'www.chatbase.co';
+          document.body.appendChild(script);
+        };
+        if (document.readyState === 'complete') {
+          onLoad();
+        } else {
+          window.addEventListener('load', onLoad);
+        }
+      })();
+    </script>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script>
+      window.Fu = window.Fu || {};
+      Fu.access_token = 'c73c052759e3602ca716ff469cde44';
+      (function (d) {
+        let s = d.createElement('script');
+        s.async = true;
+        s.src = 'https://widget.feeduser.me/widget/v1.js';
+        (d.head || d.body).appendChild(s);
+      })(document);
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
