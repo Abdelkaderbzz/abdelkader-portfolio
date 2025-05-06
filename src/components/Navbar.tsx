@@ -46,7 +46,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className='hidden md:flex items-center gap-6'>
+        <nav className='hidden lg:flex items-center gap-6'>
           {navItems.map((item) => (
             <a
               key={item.name}
@@ -74,7 +74,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className='md:hidden text-foreground'
+          className='lg:hidden text-foreground'
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label='Toggle menu'
         >
@@ -85,7 +85,7 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <nav
         className={cn(
-          'md:hidden absolute left-0 w-full bg-white/95 backdrop-blur-md shadow-md px-4 py-5 transition-all duration-300 ease-in-out',
+          'lg:hidden absolute left-0 w-full bg-white/95 backdrop-blur-md shadow-md px-4 py-5 transition-all duration-300 ease-in-out',
           isMenuOpen
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 -translate-y-full pointer-events-none'
@@ -103,9 +103,18 @@ const Navbar = () => {
             </a>
           ))}
           <a
+            href='/resume.pdf'
+            download
+            onClick={() => setIsMenuOpen(false)}
+            className='inline-flex items-center justify-center gap-2 border border-input bg-background/60 backdrop-blur-sm hover:bg-secondary transition-colors text-foreground px-4 py-2 rounded-md text-base font-medium'
+          >
+            <Download size={16} />
+            Download Resume
+          </a>
+          <a
             href='#contact'
             onClick={() => setIsMenuOpen(false)}
-            className='bg-primary text-primary-foreground px-4 py-2 rounded-md text-center font-medium transition-all hover:opacity-90 mt-2'
+            className='bg-primary text-primary-foreground px-4 py-2 rounded-md text-center font-medium transition-all hover:opacity-90'
           >
             Let's Talk
           </a>
