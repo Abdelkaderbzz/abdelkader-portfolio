@@ -29,7 +29,7 @@ const CVPreview = ({ isOpen, onClose }: CVPreviewProps) => {
       >
         {/* Header */}
         <div className='flex items-center justify-between p-4 border-b'>
-          <h2 className='text-xl font-semibold'>Resume Preview</h2>
+          <h2 className='text-xl font-semibold'>CV Preview</h2>
           <div className='flex items-center gap-2'>
             <a
               href='/Abdelkader-bouzomita_CV.pdf'

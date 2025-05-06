@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Download } from 'lucide-react';
+import { Menu, X, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { personalInfo } from '@/lib/constants';
 import CVPreview from './CVPreview';
@@ -65,8 +65,8 @@ const Navbar = () => {
               onClick={() => setIsPreviewOpen(true)}
               className='inline-flex items-center gap-2 border border-input bg-background/60 backdrop-blur-sm hover:bg-secondary transition-colors text-foreground px-4 py-2 rounded-md text-sm font-medium'
             >
-              <Download size={16} />
-              Resume
+              <Eye size={16} />
+              Preview CV
             </button>
             <a
               href='#contact'
@@ -113,8 +113,8 @@ const Navbar = () => {
               }}
               className='inline-flex items-center justify-center gap-2 border border-input bg-background/60 backdrop-blur-sm hover:bg-secondary transition-colors text-foreground px-4 py-2 rounded-md text-base font-medium'
             >
-              <Download size={16} />
-              Download Resume
+              <Eye size={16} />
+              Preview CV
             </button>
             <a
               href='#contact'
