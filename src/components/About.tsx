@@ -1,6 +1,21 @@
 import { personalInfo } from '@/lib/constants';
 import { useAnimateOnScroll } from '@/lib/animations';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { contentfulClient } from '@/lib/contentfulClient';
+
+interface Experience {
+  id: string;
+  title: string;
+  company: string;
+  date: string;
+  responsibilities: string[];
+}
+interface Education {
+  institution: string;
+  degree: string;
+  location: string;
+  date: string; // Format: "Month YYYY - Month YYYY"
+}
 
 const About = () => {
   const { isVisible: isVisible1, ref: ref1 } = useAnimateOnScroll();
@@ -13,7 +28,38 @@ const About = () => {
   const { isVisible: isVisible4, ref: ref4 } = useAnimateOnScroll({
     threshold: 0.3,
   });
-
+  const [experience, setExperience] = useState<Experience[]>([])
+  const [education, setEducation] = useState<Education[]>([]);
+  useEffect(() => {
+    contentfulClient
+      .getEntries({ content_type: 'experience' })
+      .then((response) => {
+        const items = response.items.map((item) =>
+        {
+          const fields = item.fields as unknown as Experience ;
+          return {
+            id: item.sys.id,
+            ...fields,
+          };
+        });
+        setExperience(items);
+      })
+      .catch(console.error);
+    contentfulClient
+      .getEntries({ content_type: 'education' })
+      .then((response) => {
+        const items = response.items.map((item) =>
+        {
+          const fields = item.fields as unknown as Education ;
+          return {
+            id: item.sys.id,
+            ...fields,
+          };
+        });
+        setEducation(items);
+      })
+      .catch(console.error);
+  }, []);
   return (
     <section id='about' className='section-padding bg-secondary'>
       <div className='container-tight'>
@@ -65,7 +111,7 @@ const About = () => {
           <h3 className='text-2xl font-bold mb-6'>Experience</h3>
 
           <div className='space-y-10'>
-            {personalInfo.experience?.map((job, index) => (
+            {experience?.map((job, index) => (
               <div
                 key={index}
                 className='border-l-2 border-primary/20 pl-6 relative'
@@ -74,11 +120,11 @@ const About = () => {
                 <div className='mb-2'>
                   <h4 className='text-xl font-semibold'>{job.title}</h4>
                   <p className='text-muted-foreground'>
-                    {job.company} | {job.period}
+                    {job.company} | {job.date}
                   </p>
                 </div>
                 <ul className='space-y-2 mt-4'>
-                  {job.achievements.map((achievement, i) => (
+                  {job.responsibilities.map((achievement, i) => (
                     <li
                       key={i}
                       className="text-muted-foreground before:content-['•'] before:mr-2 before:text-primary"
@@ -99,7 +145,7 @@ const About = () => {
           <h3 className='text-2xl font-bold mb-6'>Education</h3>
 
           <div className='space-y-10'>
-            {personalInfo.education?.map((edu, index) => (
+            {education?.map((edu, index) => (
               <div
                 key={index}
                 className='border-l-2 border-primary/20 pl-6 relative'
@@ -109,7 +155,7 @@ const About = () => {
                   <h4 className='text-xl font-semibold'>{edu.institution}</h4>
                   <p className='text-muted-foreground'>{edu.degree}</p>
                   <p className='text-sm text-muted-foreground'>
-                    {edu.location} | {edu.period}
+                    {edu.location} | {edu.date}
                   </p>
                 </div>
               </div>

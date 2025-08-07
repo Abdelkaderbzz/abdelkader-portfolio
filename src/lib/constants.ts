@@ -57,38 +57,6 @@ export const personalInfo = {
     },
   ],
   phone: '(216) 58627016',
-  experience: [
-    {
-      title: 'Mid-Level Frontend Developer',
-      company: 'SOFTYLINES',
-      period: '2024-Present',
-      achievements: [
-        'Built a scalable customer service platform using React.js, TypeScript, SCSS, driving 50K+ monthly active users in the first quarter.',
-        'Streamlined UI components, improving usability and increasing user satisfaction scores.',
-        'Led collaboration between development and product teams, enhancing design usability by 40% based on user feedback.',
-        'Optimized Agile workflows with Git, CI/CD pipelines, reducing deployment time by 20% and improving project efficiency.',
-        'Implemented IndexedDB caching, cutting endpoint requests by 30% and boosting app speed by 25%.',
-        'Developed a secure authentication system using Socket.io, JWT, and Auth0, increasing user engagement by 40%.',
-        'Designed & deployed a real-time notification system serving 50K+ users, boosting interaction rates by 25%.',
-        'Engineered an in-app messaging banner system, improving engagement by 40% and retention by 15%.',
-        'Built a push notification service with Service Workers & Firebase, delivering real-time alerts to 10K+ active users.',
-        'Launched a custom product tour service, reducing new user onboarding time by 25%.',
-        'Created a detailed SDK installation guide, decreasing setup time by 30% and enhancing the developer experience.',
-        'Implemented a monolithic modular architecture, improving scalability by 30% and reducing maintenance efforts by 25%.',
-      ],
-    },
-    {
-      title: 'Junior Frontend Developer',
-      company: 'SOFTYLINES',
-      period: '2022-2024',
-      achievements: [
-        'Engineered a robust back office for a multilingual educational app, enhancing user engagement by 30% through efficient content management features.',
-        'Facilitated a 25% reduction in missed appointments by enabling doctors to schedule and manage meetings directly through the app.',
-        'Developed a robust back office for a multilingual educational app, enhancing authentication and quiz creation processes, boosting user retention by 40%.',
-        'Created onQ, a real-time chat application using React.js and Socket.io, delivering a 40% increase in user engagement and collaboration efficiency.',
-      ],
-    },
-  ],
   education: [
     {
       institution: 'HORIZON UNIVERSITY',
