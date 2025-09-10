@@ -5,12 +5,24 @@ import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Articles from '@/components/Articles';
+import { contentfulClient } from '@/lib/contentfulClient';
 
 const Index = () => {
+  const [personalDetails, setPersonalDetails] = useState([]);
+
   // Smooth scroll for anchor links
   useEffect(() => {
+    contentfulClient
+      .getEntries({ content_type: 'personalInfo' })
+      .then((response) => {
+        console.log(response);
+        const items = response.items?.[0]?.fields;
+        console.log(items, 'personalDetails');
+        setPersonalDetails(items);
+      })
+      .catch(console.error);
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchorElement = target.closest('a[href^="#"]');
@@ -35,13 +47,13 @@ const Index = () => {
   }, []);
 
   return (
-    <MainLayout>
-      <Hero />
-      <About />
-      <Projects/>
-      <Articles/>
+    <MainLayout >
+      <Hero personalDetails={personalDetails} />
+      <About personalDetails={personalDetails} />
+      <Projects />
+      <Articles />
       <Skills />
-      <Contact />
+      <Contact personalDetails={personalDetails} />
     </MainLayout>
   );
 };
