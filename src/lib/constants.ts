@@ -1,18 +1,12 @@
 import {
-  LucideIcon,
   Code,
-  Layout,
-  Palette,
-  Smartphone,
   Globe,
   Database,
-  Server,
   GitBranch,
   Figma,
-  MessageSquare,
-  BookOpen,
-  Calendar,
+  LucideIcon,
 } from 'lucide-react';
+
 
 export interface Project {
   id: number;
@@ -24,11 +18,7 @@ export interface Project {
   github?: string;
 }
 
-export interface SkillCategory {
-  name: string;
-  icon: LucideIcon;
-  skills: string[];
-}
+
 
 export interface Education {
   institution: string;
@@ -36,7 +26,6 @@ export interface Education {
   location: string;
   period: string;
 }
-
 
 export const personalInfo = {
   name: 'Abdelkader Bouzomita',
@@ -71,98 +60,12 @@ export const personalInfo = {
       period: '2018-2022',
     },
   ],
-  expertise: {
-    frontendDevelopment: [
-      'JavaScript',
-      'TypeScript',
-      'React.js',
-      'Next.js',
-      'Redux',
-    ],
-    stylingAndUI: ['Tailwind CSS', 'SCSS', 'Ant Design', 'MUI'],
-    testingAndPerformance: [
-      'Jest',
-      'Cypress',
-      'Vitest',
-      'Lighthouse',
-      'IndexedDB',
-    ],
-    backendAndDevOps: ['Node.js', 'Express.js', 'Docker', 'Firebase', 'CI/CD'],
-    areasOfFocus: [
-      'Performance optimization',
-      'Scalable frontend architectures',
-      'UI/UX best practices',
-      'Real-time applications',
-    ],
-  },
 };
 
-
-export const skillsData: SkillCategory[] = [
-  {
-    name: 'Frontend Development',
-    icon: Code,
-    skills: [
-      'HTML5',
-      'CSS3',
-      'JavaScript (ES6+)',
-      'TypeScript',
-      'React',
-      'Vue.js',
-      'Next.js',
-      'Tailwind CSS',
-      'Zustand',
-      'React Query',
-      'Redux Toolkit',
-      'SCSS',
-    ],
-  },
-  {
-    name: 'Web Technologies',
-    icon: Globe,
-    skills: [
-      'RESTful APIs',
-      'GraphQL',
-      'WebSockets',
-      'Performance Optimization',
-      'SEO',
-    ],
-  },
-  {
-    name: 'Backend & Database',
-    icon: Database,
-    skills: [
-      'Node.js',
-      'Express',
-      'MongoDB',
-      'Firebase',
-      'SQL Basics',
-      'Supabase',
-      'Strapi',
-    ],
-  },
-  {
-    name: 'Version Control',
-    icon: GitBranch,
-    skills: [
-      'Git',
-      'GitHub',
-      'GitLab',
-      'Conventional Commits',
-      'Branching Strategies',
-    ],
-  },
-  {
-    name: 'Tools & Workflow',
-    icon: Figma,
-    skills: [
-      'VS Code',
-      'npm/yarn',
-      'Webpack',
-      'Vite',
-      'Jest',
-      'Testing Library',
-      'Agile Methodology',
-    ],
-  },
+export const skillsIcons: LucideIcon[] = [
+  Code,
+  Globe,
+  Database,
+  GitBranch,
+  Figma,
 ];
