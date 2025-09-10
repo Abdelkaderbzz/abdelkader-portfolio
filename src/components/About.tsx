@@ -1,4 +1,3 @@
-import { personalInfo } from '@/lib/constants';
 import { useAnimateOnScroll } from '@/lib/animations';
 import { useEffect, useState } from 'react';
 import { contentfulClient } from '@/lib/contentfulClient';
@@ -17,7 +16,7 @@ interface Education {
   date: string; // Format: "Month YYYY - Month YYYY"
 }
 
-const About = () => {
+const About = ({ personalDetails }) => {
   const { isVisible: isVisible1, ref: ref1 } = useAnimateOnScroll();
   const { isVisible: isVisible2, ref: ref2 } = useAnimateOnScroll({
     threshold: 0.2,
@@ -28,15 +27,14 @@ const About = () => {
   const { isVisible: isVisible4, ref: ref4 } = useAnimateOnScroll({
     threshold: 0.3,
   });
-  const [experience, setExperience] = useState<Experience[]>([])
+  const [experience, setExperience] = useState<Experience[]>([]);
   const [education, setEducation] = useState<Education[]>([]);
   useEffect(() => {
     contentfulClient
       .getEntries({ content_type: 'experience' })
       .then((response) => {
-        const items = response.items.map((item) =>
-        {
-          const fields = item.fields as unknown as Experience ;
+        const items = response.items.map((item) => {
+          const fields = item.fields as unknown as Experience;
           return {
             id: item.sys.id,
             ...fields,
@@ -48,9 +46,8 @@ const About = () => {
     contentfulClient
       .getEntries({ content_type: 'education' })
       .then((response) => {
-        const items = response.items.map((item) =>
-        {
-          const fields = item.fields as unknown as Education ;
+        const items = response.items.map((item) => {
+          const fields = item.fields as unknown as Education;
           return {
             id: item.sys.id,
             ...fields,
@@ -82,7 +79,7 @@ const About = () => {
               <div className='absolute inset-0 bg-black/10 z-10'></div>
               <img
                 src='/images/avatar.png'
-                alt={personalInfo.name}
+                alt={personalDetails?.name}
                 className='object-cover w-full h-full'
               />
             </div>
@@ -94,13 +91,15 @@ const About = () => {
             }`}
           >
             <div>
-              <h3 className='text-2xl font-bold mb-2'>{personalInfo.name}</h3>
+              <h3 className='text-2xl font-bold mb-2'>
+                {personalDetails?.name}
+              </h3>
               <p className='text-muted-foreground'>
-                {personalInfo.title} based in {personalInfo.location}
+                {personalDetails?.title} based in {personalDetails?.location}
               </p>
             </div>
 
-            <p className='text-base md:text-lg'>{personalInfo.longBio}</p>
+            <p className='text-base md:text-lg'>{personalDetails?.longBio}</p>
           </div>
         </div>
 
