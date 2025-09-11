@@ -117,7 +117,6 @@ const Contact = ({ personalDetails }) => {
             ...fields,
           };
         });
-        console.log(items, 'items');
         setSocials(items);
       });
   }, []);

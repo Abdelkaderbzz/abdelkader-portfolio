@@ -17,9 +17,7 @@ const Index = () => {
     contentfulClient
       .getEntries({ content_type: 'personalInfo' })
       .then((response) => {
-        console.log(response);
         const items = response.items?.[0]?.fields;
-        console.log(items, 'personalDetails');
         setPersonalDetails(items);
       })
       .catch(console.error);
