@@ -35,7 +35,7 @@ export const sendEmail = async (data: EmailData): Promise<boolean> => {
 
     return true;
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error sending email:');
     toast({
       title: 'Error',
       description:
