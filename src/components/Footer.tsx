@@ -24,22 +24,6 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <div
-          className='badge-base LI-profile-badge'
-          data-locale='en_US'
-          data-size='medium'
-          data-theme='light'
-          data-type='HORIZONTAL'
-          data-vanity='abdelkader-bouzomita'
-          data-version='v1'
-        >
-          <a
-            className='badge-base__link LI-simple-link'
-            href='https://tn.linkedin.com/in/abdelkader-bouzomita?trk=profile-badge'
-          >
-            Bouzomita Abdelkader
-          </a>
-        </div>
       </div>
       <a
         href='#home'
