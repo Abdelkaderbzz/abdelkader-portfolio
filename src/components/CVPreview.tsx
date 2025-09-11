@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Download, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { contentfulClient } from '@/lib/contentfulClient';
 
 interface CVPreviewProps {
   isOpen: boolean;
@@ -9,7 +10,22 @@ interface CVPreviewProps {
 
 const CVPreview = ({ isOpen, onClose }: CVPreviewProps) => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const [cvData, setCVData] = useState([]);
+  useEffect(() => {
+    contentfulClient
+      .getEntries({ content_type: 'cv' })
+      .then((response) =>
+      {
+        console.log(response, 'cv response');
+        const url = response?.items?.[0]?.fields?.cv?.fields?.file?.url;
+        if (url) {
+          setCVData([url]);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
   if (!isOpen) return null;
 
   return (
@@ -56,7 +72,7 @@ const CVPreview = ({ isOpen, onClose }: CVPreviewProps) => {
             </div>
           )}
           <iframe
-            src='/Abdelkader-bouzomita_CV.pdf#toolbar=0'
+            src={`${cvData[0]}#toolbar=0`}
             className='w-full h-full'
             onLoad={() => setIsLoading(false)}
           />
