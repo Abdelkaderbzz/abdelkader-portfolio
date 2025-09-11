@@ -16,7 +16,9 @@ interface Education {
   date: string; // Format: "Month YYYY - Month YYYY"
 }
 
-const About = ({ personalDetails }) => {
+const About = ({ personalDetails }) =>
+{
+
   const { isVisible: isVisible1, ref: ref1 } = useAnimateOnScroll();
   const { isVisible: isVisible2, ref: ref2 } = useAnimateOnScroll({
     threshold: 0.2,
@@ -78,9 +80,9 @@ const About = ({ personalDetails }) => {
             <div className='aspect-square overflow-hidden rounded-2xl relative'>
               <div className='absolute inset-0 bg-black/10 z-10'></div>
               <img
-                src='/images/avatar.png'
+                src={personalDetails?.image?.fields?.file?.url}
                 alt={personalDetails?.name}
-                className='object-cover w-full h-full'
+                className='object-cover w-full h-[135%]'
               />
             </div>
           </div>
