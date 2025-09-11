@@ -16,7 +16,6 @@ const CVPreview = ({ isOpen, onClose }: CVPreviewProps) => {
       .getEntries({ content_type: 'cv' })
       .then((response) =>
       {
-        console.log(response, 'cv response');
         const url = response?.items?.[0]?.fields?.cv?.fields?.file?.url;
         if (url) {
           setCVData([url]);
@@ -30,13 +29,10 @@ const CVPreview = ({ isOpen, onClose }: CVPreviewProps) => {
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center'>
-      {/* Backdrop */}
       <div
         className='fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity'
         onClick={onClose}
       />
-
-      {/* Modal */}
       <div
         className={cn(
           'relative w-full max-w-4xl h-[80vh] bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300',
