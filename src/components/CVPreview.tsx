@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Download, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { contentfulClient } from '@/lib/contentfulClient';
 
 interface CVPreviewProps {
   isOpen: boolean;
@@ -9,18 +10,29 @@ interface CVPreviewProps {
 
 const CVPreview = ({ isOpen, onClose }: CVPreviewProps) => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const [cvData, setCVData] = useState([]);
+  useEffect(() => {
+    contentfulClient
+      .getEntries({ content_type: 'cv' })
+      .then((response) =>
+      {
+        const url = response?.items?.[0]?.fields?.cv?.fields?.file?.url;
+        if (url) {
+          setCVData([url]);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
   if (!isOpen) return null;
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center'>
-      {/* Backdrop */}
       <div
         className='fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity'
         onClick={onClose}
       />
-
-      {/* Modal */}
       <div
         className={cn(
           'relative w-full max-w-4xl h-[80vh] bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300',
@@ -56,7 +68,7 @@ const CVPreview = ({ isOpen, onClose }: CVPreviewProps) => {
             </div>
           )}
           <iframe
-            src='/Abdelkader-bouzomita_CV.pdf#toolbar=0'
+            src={`${cvData[0]}#toolbar=0`}
             className='w-full h-full'
             onLoad={() => setIsLoading(false)}
           />

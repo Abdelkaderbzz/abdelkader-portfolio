@@ -1,8 +1,24 @@
-import { personalInfo } from '@/lib/constants';
 import { useAnimateOnScroll } from '@/lib/animations';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { contentfulClient } from '@/lib/contentfulClient';
 
-const About = () => {
+interface Experience {
+  id: string;
+  title: string;
+  company: string;
+  date: string;
+  responsibilities: string[];
+}
+interface Education {
+  institution: string;
+  degree: string;
+  location: string;
+  date: string; // Format: "Month YYYY - Month YYYY"
+}
+
+const About = ({ personalDetails }) =>
+{
+
   const { isVisible: isVisible1, ref: ref1 } = useAnimateOnScroll();
   const { isVisible: isVisible2, ref: ref2 } = useAnimateOnScroll({
     threshold: 0.2,
@@ -13,7 +29,36 @@ const About = () => {
   const { isVisible: isVisible4, ref: ref4 } = useAnimateOnScroll({
     threshold: 0.3,
   });
-
+  const [experience, setExperience] = useState<Experience[]>([]);
+  const [education, setEducation] = useState<Education[]>([]);
+  useEffect(() => {
+    contentfulClient
+      .getEntries({ content_type: 'experience' })
+      .then((response) => {
+        const items = response.items.map((item) => {
+          const fields = item.fields as unknown as Experience;
+          return {
+            id: item.sys.id,
+            ...fields,
+          };
+        });
+        setExperience(items);
+      })
+      .catch(console.error);
+    contentfulClient
+      .getEntries({ content_type: 'education' })
+      .then((response) => {
+        const items = response.items.map((item) => {
+          const fields = item.fields as unknown as Education;
+          return {
+            id: item.sys.id,
+            ...fields,
+          };
+        });
+        setEducation(items);
+      })
+      .catch(console.error);
+  }, []);
   return (
     <section id='about' className='section-padding bg-secondary'>
       <div className='container-tight'>
@@ -35,9 +80,9 @@ const About = () => {
             <div className='aspect-square overflow-hidden rounded-2xl relative'>
               <div className='absolute inset-0 bg-black/10 z-10'></div>
               <img
-                src='/images/avatar.png'
-                alt={personalInfo.name}
-                className='object-cover w-full h-full'
+                src={personalDetails?.image?.fields?.file?.url}
+                alt={personalDetails?.name}
+                className='object-cover w-full h-[135%]'
               />
             </div>
           </div>
@@ -48,13 +93,15 @@ const About = () => {
             }`}
           >
             <div>
-              <h3 className='text-2xl font-bold mb-2'>{personalInfo.name}</h3>
+              <h3 className='text-2xl font-bold mb-2'>
+                {personalDetails?.name}
+              </h3>
               <p className='text-muted-foreground'>
-                {personalInfo.title} based in {personalInfo.location}
+                {personalDetails?.title} based in {personalDetails?.location}
               </p>
             </div>
 
-            <p className='text-base md:text-lg'>{personalInfo.longBio}</p>
+            <p className='text-base md:text-lg'>{personalDetails?.longBio}</p>
           </div>
         </div>
 
@@ -65,7 +112,7 @@ const About = () => {
           <h3 className='text-2xl font-bold mb-6'>Experience</h3>
 
           <div className='space-y-10'>
-            {personalInfo.experience?.map((job, index) => (
+            {experience?.map((job, index) => (
               <div
                 key={index}
                 className='border-l-2 border-primary/20 pl-6 relative'
@@ -74,11 +121,11 @@ const About = () => {
                 <div className='mb-2'>
                   <h4 className='text-xl font-semibold'>{job.title}</h4>
                   <p className='text-muted-foreground'>
-                    {job.company} | {job.period}
+                    {job.company} | {job.date}
                   </p>
                 </div>
                 <ul className='space-y-2 mt-4'>
-                  {job.achievements.map((achievement, i) => (
+                  {job.responsibilities.map((achievement, i) => (
                     <li
                       key={i}
                       className="text-muted-foreground before:content-['•'] before:mr-2 before:text-primary"
@@ -99,7 +146,7 @@ const About = () => {
           <h3 className='text-2xl font-bold mb-6'>Education</h3>
 
           <div className='space-y-10'>
-            {personalInfo.education?.map((edu, index) => (
+            {education?.map((edu, index) => (
               <div
                 key={index}
                 className='border-l-2 border-primary/20 pl-6 relative'
@@ -109,7 +156,7 @@ const About = () => {
                   <h4 className='text-xl font-semibold'>{edu.institution}</h4>
                   <p className='text-muted-foreground'>{edu.degree}</p>
                   <p className='text-sm text-muted-foreground'>
-                    {edu.location} | {edu.period}
+                    {edu.location} | {edu.date}
                   </p>
                 </div>
               </div>

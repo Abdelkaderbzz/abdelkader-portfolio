@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { personalInfo } from '@/lib/constants';
 import CVPreview from './CVPreview';
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,9 +27,8 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Create a shorter version of the name for the logo
-  const firstName = personalInfo.name.split(' ')[0];
-  const lastName = personalInfo.name.split(' ')[1];
+  const firstName = 'Abdelkader';
+  const lastName = 'Bouzomita';
 
   return (
     <>

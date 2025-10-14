@@ -38,7 +38,9 @@ const ProjectCard = ({
 }: {
   project: Project;
   animStyle?: React.CSSProperties;
-}) => {
+  }) =>
+{
+  console.log('Rendering ProjectCard for:', project);
   const { isVisible, ref } = useAnimateOnScroll({ threshold: 0.1 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -70,14 +72,18 @@ const ProjectCard = ({
             transform: `translateX(-${currentImageIndex * 100}%)`,
           }}
         >
-          {project.images.map((img, imgIdx) => (
-            <img
+          {project.images.map((img, imgIdx) =>
+          {
+            console.log('Rendering image:', img?.fields?.file?.url);
+            return (
+              <img
               key={imgIdx}
               src={img?.fields?.file?.url}
               alt={`${project.title} screenshot ${imgIdx + 1}`}
               className='object-cover min-w-full h-full'
-            />
-          ))}
+              />
+            )
+          })}
         </div>
 
         {/* Gradient overlay */}
@@ -222,6 +228,7 @@ const Projects = ({
 
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
           {[...projects].reverse().map((project, index) => (
+            
             <ProjectCard
               key={project.id || index}
               project={project}
