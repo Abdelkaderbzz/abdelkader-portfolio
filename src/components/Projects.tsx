@@ -40,7 +40,6 @@ const ProjectCard = ({
   animStyle?: React.CSSProperties;
   }) =>
 {
-  console.log('Rendering ProjectCard for:', project);
   const { isVisible, ref } = useAnimateOnScroll({ threshold: 0.1 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -72,24 +71,20 @@ const ProjectCard = ({
             transform: `translateX(-${currentImageIndex * 100}%)`,
           }}
         >
-          {project.images.map((img, imgIdx) =>
-          {
-            console.log('Rendering image:', img?.fields?.file?.url);
+          {project.images.map((img, imgIdx) => {
             return (
               <img
-              key={imgIdx}
-              src={img?.fields?.file?.url}
-              alt={`${project.title} screenshot ${imgIdx + 1}`}
-              className='object-cover min-w-full h-full'
+                key={`${project.id ?? 'proj'}-img-${imgIdx}`}
+                src={img?.fields?.file?.url}
+                alt={`${project.title} screenshot ${imgIdx + 1}`}
+                className='object-cover min-w-full h-full'
               />
-            )
+            );
           })}
         </div>
 
-        {/* Gradient overlay */}
         <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black/60'></div>
 
-        {/* Navigation buttons with improved visibility */}
         {project.images.length > 1 && (
           <>
             <button
@@ -117,7 +112,7 @@ const ProjectCard = ({
             <div className='absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 transition-opacity duration-300 opacity-80 group-hover:opacity-100'>
               {project.images.map((_, imgIndex) => (
                 <button
-                  key={imgIndex}
+                  key={`${project.id ?? 'proj'}-dot-${imgIndex}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     setCurrentImageIndex(imgIndex);
@@ -167,9 +162,9 @@ const ProjectCard = ({
           {project.description}
         </p>
         <div className='flex flex-wrap gap-2 mt-4'>
-          {project.tags.map((tag) => (
+          {project.tags.map((tag, tagIdx) => (
             <span
-              key={tag}
+              key={`${project.id ?? 'proj'}-tag-${tagIdx}`}
               className='px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground hover:bg-primary/10 transition-colors duration-300'
             >
               {tag}
@@ -203,7 +198,13 @@ const Projects = ({
               ...fields,
             };
           });
-          setProjects(items);
+          const uniqueById = Array.from(
+            new Map(items.map((it) => [String(it.id), it])).values()
+          );
+          if (uniqueById.length !== items.length) {
+            console.warn('Duplicate projects detected and removed.');
+          }
+          setProjects(uniqueById);
         })
         .catch(console.error);
   }, [ initialProjects]);
@@ -227,14 +228,25 @@ const Projects = ({
         </div>
 
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
-          {[...projects].reverse().map((project, index) => (
-            
-            <ProjectCard
-              key={project.id || index}
-              project={project}
-              animStyle={projectAnimItems[index]?.style}
-            />
-          ))}
+          {(() => {
+            try {
+              const keys = [...projects].reverse().map((p, i) => `${p.id ?? 'proj'}-${i}`);
+              const dupes = keys.filter((k, i) => keys.indexOf(k) !== i);
+              if (dupes.length) {
+                console.warn('Duplicate project keys detected:', dupes);
+              }
+            } catch (e) {
+              console.error('Error while checking project keys:', e);
+            }
+
+            return [...projects].reverse().map((project, index) => (
+              <ProjectCard
+                key={`${project.id ?? 'proj'}-${index}`}
+                project={project}
+                animStyle={projectAnimItems[index]?.style}
+              />
+            ));
+          })()}
         </div>
       </div>
     </section>
