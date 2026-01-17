@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,10 +8,26 @@ import {
   RouterProvider,
   RouteObject,
 } from "react-router-dom";
+import { getCalApi } from "@calcom/embed-react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+// Cal.com floating button initialization
+const useCalWidget = () => {
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "30min" });
+      cal("floatingButton", {
+        calLink: "abdelkader/30min",
+        buttonPosition: "bottom-left",
+        config: { layout: "month_view", theme: "light" },
+      });
+      cal("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
+};
 
 const routes: RouteObject[] = [
   { path: "/", element: <Index /> },
@@ -18,28 +35,30 @@ const routes: RouteObject[] = [
 ];
 
 const router = createBrowserRouter(routes, {
-  // keep router-level future configuration (some parts may read from router)
   future: {
     // @ts-expect-error - runtime-only flag supported by router internals
       v7_prependBasename: true,
   },
 });
 
-// Explicit future flags passed to RouterProvider at runtime to silence warnings
 const futureFlags = ({
-  // these are runtime-only flags read by RouterProvider
   v7_startTransition: true,
   v7_relativeSplatPath: true,
 } as unknown);
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-  <RouterProvider router={router} future={futureFlags} />
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Initialize Cal.com floating button
+  useCalWidget();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <RouterProvider router={router} future={futureFlags} />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
