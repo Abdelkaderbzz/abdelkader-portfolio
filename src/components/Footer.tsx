@@ -4,7 +4,7 @@ import { ArrowUp } from "lucide-react";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const name = 'Abdelkader Bouzomita';
-  const title = 'FrontEnd Developer';
+  const title = 'Software Engineer';
   return (
     <footer className='bg-primary text-primary-foreground py-12 relative'>
       <div className='container-tight'>
