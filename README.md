@@ -1,6 +1,6 @@
 # Portfolio Project - Abdelkader Bouzomita
 
-Welcome to my personal portfolio! This project showcases my work and skills as a frontend developer. It is built with modern web technologies to highlight my proficiency and design sense.
+Welcome to my personal portfolio! This project showcases my work and skills as a Software Engineer. It is built with modern web technologies to highlight my proficiency and design sense.
 
 ## Technologies Used
 
