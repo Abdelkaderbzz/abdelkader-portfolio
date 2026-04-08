@@ -4,6 +4,7 @@ import { useAnimateOnScroll, useStaggeredAnimation } from '@/lib/animations';
 import { contentfulClient } from '@/lib/contentfulClient';
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 // Types
@@ -35,10 +36,12 @@ interface ProjectsProps {
 const ProjectCard = ({
   project,
   animStyle,
+  onOpen,
 }: {
   project: Project;
   animStyle?: React.CSSProperties;
-  }) =>
+  onOpen: (project: Project) => void;
+}) =>
 {
   const { isVisible, ref } = useAnimateOnScroll({ threshold: 0.1 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -62,6 +65,15 @@ const ProjectCard = ({
         isVisible ? 'animate-fade-in' : 'opacity-0'
       }`}
       style={animStyle}
+      onClick={() => onOpen(project)}
+      role='button'
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen(project);
+        }
+      }}
     >
       <div className='relative aspect-video overflow-hidden'>
         {/* Image gallery with transition */}
@@ -141,6 +153,7 @@ const ProjectCard = ({
                 href={project.github}
                 target='_blank'
                 rel='noopener noreferrer'
+                onClick={(e) => e.stopPropagation()}
                 className='text-muted-foreground hover:text-primary transition-colors duration-300 transform hover:scale-110'
                 aria-label={`GitHub repository for ${project.title}`}
               >
@@ -151,6 +164,7 @@ const ProjectCard = ({
               href={project.link}
               target='_blank'
               rel='noopener noreferrer'
+              onClick={(e) => e.stopPropagation()}
               className='text-muted-foreground hover:text-primary transition-colors duration-300 transform hover:scale-110'
               aria-label={`Visit live demo of ${project.title}`}
             >
@@ -184,6 +198,7 @@ const Projects = ({
   className = '',
 }: ProjectsProps) => {
   const [projects, setProjects] = useState<Project[]>(initialProjects || []);
+  const navigate = useNavigate();
   const { isVisible: headerVisible, ref: headerRef } = useAnimateOnScroll();
   const projectAnimItems = useStaggeredAnimation(projects.length, 0.1);
 
@@ -244,6 +259,11 @@ const Projects = ({
                 key={`${project.id ?? 'proj'}-${index}`}
                 project={project}
                 animStyle={projectAnimItems[index]?.style}
+                onOpen={(selectedProject) =>
+                  navigate(`/projects/${encodeURIComponent(selectedProject.id)}`, {
+                    state: { project: selectedProject },
+                  })
+                }
               />
             ));
           })()}

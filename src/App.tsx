@@ -11,6 +11,7 @@ import {
 import { getCalApi } from "@calcom/embed-react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import ProjectDetails from "./pages/ProjectDetails";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const useCalWidget = () => {
 
 const routes: RouteObject[] = [
   { path: "/", element: <Index /> },
+  { path: "/projects/:projectId", element: <ProjectDetails /> },
   { path: "*", element: <NotFound /> },
 ];
 
