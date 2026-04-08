@@ -14,12 +14,28 @@ import { useToast } from '@/hooks/use-toast';
 import { sendEmail, type EmailData } from '@/services/emailService';
 import { contentfulClient } from '@/lib/contentfulClient';
 
-const Contact = ({ personalDetails }) => {
+type PersonalDetails = {
+  email?: string;
+  phone?: string;
+  location?: string;
+};
+
+type SocialLink = {
+  id: string;
+  name: string;
+  url: string;
+};
+
+interface ContactProps {
+  personalDetails: PersonalDetails | null;
+}
+
+const Contact = ({ personalDetails }: ContactProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [socials, setSocials] = useState([]);
+  const [socials, setSocials] = useState<SocialLink[]>([]);
   const [errors, setErrors] = useState<{
     name?: string;
     email?: string;
@@ -111,7 +127,7 @@ const Contact = ({ personalDetails }) => {
       .getEntries({ content_type: 'socials' })
       .then((response) => {
         const items = response.items.map((item) => {
-          const fields = item.fields as any;
+          const fields = item.fields as Omit<SocialLink, 'id'>;
           return {
             id: item.sys.id,
             ...fields,

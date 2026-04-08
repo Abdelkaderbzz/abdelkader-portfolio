@@ -3,7 +3,16 @@ import { ArrowDown } from "lucide-react";
 import { useAnimateOnScroll } from "@/lib/animations";
 import AnimatedBackground from "./AnimatedBackground";
 
-const Hero = ({ personalDetails }) => {
+type PersonalDetails = {
+  title?: string;
+  bio?: string;
+};
+
+interface HeroProps {
+  personalDetails: PersonalDetails | null;
+}
+
+const Hero = ({ personalDetails }: HeroProps) => {
   const { isVisible: isVisible1, ref: ref1 } = useAnimateOnScroll();
   const { isVisible: isVisible2, ref: ref2 } = useAnimateOnScroll({
     threshold: 0.2,
@@ -72,7 +81,7 @@ const Hero = ({ personalDetails }) => {
       </div>
 
       <a
-        href='#about'
+        href='#projects'
         className='absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground hover:text-foreground transition-colors z-10'
         aria-label='Scroll down'
       >

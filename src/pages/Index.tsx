@@ -1,6 +1,5 @@
 import MainLayout from '@/layouts/MainLayout';
 import Hero from '@/components/Hero';
-import About from '@/components/About';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
@@ -9,15 +8,25 @@ import { useEffect, useState } from 'react';
 import Articles from '@/components/Articles';
 import { contentfulClient } from '@/lib/contentfulClient';
 
+type PersonalDetails = {
+  title?: string;
+  bio?: string;
+  email?: string;
+  phone?: string;
+  location?: string;
+};
+
 const Index = () => {
-  const [personalDetails, setPersonalDetails] = useState([]);
+  const [personalDetails, setPersonalDetails] = useState<PersonalDetails | null>(
+    null
+  );
 
   // Smooth scroll for anchor links
   useEffect(() => {
     contentfulClient
       .getEntries({ content_type: 'personalInfo' })
       .then((response) => {
-        const items = response.items?.[0]?.fields;
+        const items = response.items?.[0]?.fields as PersonalDetails | undefined;
         setPersonalDetails(items);
       })
       .catch(console.error);
@@ -47,7 +56,6 @@ const Index = () => {
   return (
     <MainLayout >
       <Hero personalDetails={personalDetails} />
-      <About personalDetails={personalDetails} />
       <Projects />
       <Articles />
       <Skills />
