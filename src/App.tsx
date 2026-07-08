@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { getCalApi } from "@calcom/embed-react";
 import Index from "./pages/Index";
+import CaseStudy from "./pages/CaseStudy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const useCalWidget = () => {
 
 const routes: RouteObject[] = [
   { path: "/", element: <Index /> },
+  { path: "/work/:slug", element: <CaseStudy /> },
   { path: "*", element: <NotFound /> },
 ];
 
