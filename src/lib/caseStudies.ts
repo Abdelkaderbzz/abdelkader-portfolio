@@ -132,6 +132,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Visual Task Management Application',
     role: 'Frontend Developer',
     year: '2023',
+    banner: '/images/chronomanager-banner.png',
     overview:
       'An intuitive task management app featuring folders, lists, drag-and-drop, and three powerful views: Kanban, Priority, and List — designed to keep you organized and in control.',
     challenge:

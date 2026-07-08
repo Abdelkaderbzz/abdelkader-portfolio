@@ -17,15 +17,6 @@ interface Education {
   date: string;
 }
 
-const additionalEducation: Education[] = [
-  {
-    institution: 'HORIZON UNIVERSITY',
-    degree: "Master's Degree in Computer Science",
-    location: 'Sousse, Tunisia',
-    date: '2025 - 2027',
-  },
-];
-
 const About = ({ personalDetails }) => {
   const [experience, setExperience] = useState<Experience[]>([]);
   const [education, setEducation] = useState<Education[]>([]);
@@ -53,7 +44,7 @@ const About = ({ personalDetails }) => {
           id: item.sys.id,
           ...(item.fields as unknown as Education),
         }));
-        setEducation([...additionalEducation, ...fetched]);
+        setEducation(fetched);
       })
       .catch(console.error);
   }, []);
