@@ -4,30 +4,40 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    /* Editorial × Engineered — warm paper / ink / vermilion */
+    --background: 38 30% 96%;
+    --foreground: 24 14% 9%;
+    --card: 40 40% 98%;
+    --card-foreground: 24 14% 9%;
+    --popover: 40 40% 98%;
+    --popover-foreground: 24 14% 9%;
+    --primary: 24 14% 9%;
+    --primary-foreground: 40 40% 97%;
+    --secondary: 34 24% 91%;
+    --secondary-foreground: 24 14% 12%;
+    --muted: 34 20% 92%;
+    --muted-foreground: 26 8% 40%;
+    --accent: 34 24% 91%;
+    --accent-foreground: 24 14% 12%;
+    --destructive: 4 72% 47%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --border: 30 16% 85%;
+    --input: 30 16% 82%;
+    --ring: 14 82% 48%;
     --radius: 0.5rem;
+
+    --brand: 14 82% 48%;
+    --brand-foreground: 40 40% 97%;
+    --paper-line: 30 16% 88%;
   }
 
   * {
     @apply border-border;
+  }
+
+  ::selection {
+    background: hsl(var(--brand) / 0.9);
+    color: hsl(var(--brand-foreground));
   }
 
   html {
@@ -37,6 +47,20 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
+    font-size: 16.5px;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+
+  /* Subtle paper grain for atmosphere */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   h1,
@@ -45,33 +69,91 @@
   h4,
   h5,
   h6 {
-    @apply font-display;
+    @apply font-display text-foreground;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
   }
 }
 
 @layer components {
-  .glass {
-    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-sm;
+  .section-padding {
+    @apply px-5 py-24 md:px-8 md:py-32;
   }
 
-  .section-padding {
-    @apply px-4 py-24 md:px-8 lg:px-16;
+  .section-muted {
+    @apply bg-secondary/50;
   }
 
   .container-tight {
-    @apply max-w-5xl mx-auto px-4 md:px-8;
+    @apply max-w-6xl mx-auto px-5 md:px-8;
   }
 
-  .split {
-    @apply grid md:grid-cols-2 gap-8 md:gap-16;
+  /* Monospace technical label, e.g. "01 / Selected Work" */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground;
   }
 
-  .link-underline {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+  .eyebrow-index {
+    @apply text-brand;
+  }
+
+  .display-title {
+    @apply font-display font-normal tracking-[-0.02em] leading-[1.02];
+  }
+
+  .text-body {
+    @apply text-base md:text-lg text-foreground/75 leading-relaxed;
+  }
+
+  .card-simple {
+    @apply rounded-xl border border-border bg-card;
+  }
+
+  .link-accent {
+    @apply relative inline-flex items-center text-foreground transition-colors hover:text-brand;
+  }
+
+  .rule {
+    @apply h-px w-full bg-[hsl(var(--paper-line))];
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-tight transition-all hover:bg-brand hover:text-brand-foreground;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-input px-6 py-3 rounded-full text-sm font-medium tracking-tight transition-colors hover:bg-secondary;
   }
 }
 
-/* Animations */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease forwards;
+  }
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -83,15 +165,10 @@
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.5s ease forwards;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
     opacity: 1;
+    transform: none;
   }
 }
