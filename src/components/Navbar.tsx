@@ -1,135 +1,131 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Eye } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import CVPreview from './CVPreview';
 
+const navItems = [
+  { name: 'About', href: '/#about' },
+  { name: 'Volunteering', href: '/#volunteering' },
+  { name: 'Teaching', href: '/#teaching' },
+  { name: 'Work', href: '/#projects' },
+  { name: 'Writing', href: '/#articles' },
+  { name: 'Skills', href: '/#skills' },
+  { name: 'Contact', href: '/#contact' },
+];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Articles', href: '#articles' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const firstName = 'Abdelkader';
-  const lastName = 'Bouzomita';
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 z-50 w-full transition-all duration-300 ease-in-out',
-          isScrolled
-            ? 'bg-white/80 backdrop-blur-md shadow-sm'
+          'fixed top-0 left-0 z-50 w-full transition-all duration-300',
+          isScrolled || !isHome
+            ? 'bg-background/80 backdrop-blur-md border-b border-[hsl(var(--paper-line))]'
             : 'bg-transparent'
         )}
       >
-        <div className='container-tight flex h-16 items-center justify-between'>
-          <a
-            href='#home'
-            className='text-xl font-semibold tracking-tight cursor-pointer'
+        <div className="container-tight flex h-16 items-center justify-between">
+          <Link
+            to="/"
+            className="font-display text-lg tracking-tight leading-none"
           >
-            <span className='text-primary'>{firstName}.</span>
-            {lastName}
-          </a>
+            Abdelkader
+            <span className="text-brand">.</span>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <nav className='hidden lg:flex items-center gap-6'>
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
-                className='text-sm font-medium text-muted-foreground hover:text-foreground transition-colors link-underline'
+                to={item.href}
+                className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
             <button
               onClick={() => setIsPreviewOpen(true)}
-              className='inline-flex items-center gap-2 border border-input bg-background/60 backdrop-blur-sm hover:bg-secondary transition-colors text-foreground px-4 py-2 rounded-md text-sm font-medium'
+              className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Eye size={16} />
-              Preview CV
+              CV
             </button>
-            <a
-              href='#contact'
-              className='bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium transition-all hover:opacity-90'
+            <Link
+              to="/#contact"
+              className="group inline-flex items-center gap-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-brand hover:text-brand-foreground px-4 py-2 rounded-full transition-all"
             >
-              Let's Talk
-            </a>
+              Let's talk
+              <ArrowUpRight
+                size={14}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
-            className='lg:hidden text-foreground'
+            className="lg:hidden p-1"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label='Toggle menu'
+            aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        <nav
-          className={cn(
-            'lg:hidden absolute left-0 w-full bg-white/95 backdrop-blur-md shadow-md px-4 py-5 transition-all duration-300 ease-in-out',
-            isMenuOpen
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 -translate-y-full pointer-events-none'
-          )}
-        >
-          <div className='flex flex-col gap-5'>
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className='text-base font-medium text-foreground border-b border-border pb-2'
+        {isMenuOpen && (
+          <nav className="lg:hidden border-t border-[hsl(var(--paper-line))] bg-background px-5 py-5">
+            <div className="flex flex-col">
+              {navItems.map((item, i) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="flex items-center justify-between py-3 border-b border-[hsl(var(--paper-line))] font-display text-2xl"
+                >
+                  {item.name}
+                  <span className="font-mono text-xs text-muted-foreground">
+                    0{i + 1}
+                  </span>
+                </Link>
+              ))}
+              <button
+                onClick={() => {
+                  setIsPreviewOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center justify-between py-3 border-b border-[hsl(var(--paper-line))] font-display text-2xl text-left"
               >
-                {item.name}
-              </a>
-            ))}
-            <button
-              onClick={() => {
-                setIsPreviewOpen(true);
-                setIsMenuOpen(false);
-              }}
-              className='inline-flex items-center justify-center gap-2 border border-input bg-background/60 backdrop-blur-sm hover:bg-secondary transition-colors text-foreground px-4 py-2 rounded-md text-base font-medium'
-            >
-              <Eye size={16} />
-              Preview CV
-            </button>
-            <a
-              href='#contact'
-              onClick={() => setIsMenuOpen(false)}
-              className='bg-primary text-primary-foreground px-4 py-2 rounded-md text-center font-medium transition-all hover:opacity-90'
-            >
-              Let's Talk
-            </a>
-          </div>
-        </nav>
+                CV
+                <span className="font-mono text-xs text-muted-foreground">
+                  0{navItems.length + 1}
+                </span>
+              </button>
+              <Link
+                to="/#contact"
+                className="btn-primary mt-5 w-full"
+              >
+                Let's talk
+              </Link>
+            </div>
+          </nav>
+        )}
       </header>
 
-      <CVPreview
-        isOpen={isPreviewOpen}
-        onClose={() => setIsPreviewOpen(false)}
-      />
+      <CVPreview isOpen={isPreviewOpen} onClose={() => setIsPreviewOpen(false)} />
     </>
   );
 };

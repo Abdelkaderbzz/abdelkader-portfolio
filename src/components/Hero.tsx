@@ -1,83 +1,98 @@
-
-import { ArrowDown } from "lucide-react";
-import { useAnimateOnScroll } from "@/lib/animations";
-import AnimatedBackground from "./AnimatedBackground";
+import { ArrowDownRight } from 'lucide-react';
 
 const Hero = ({ personalDetails }) => {
-  const { isVisible: isVisible1, ref: ref1 } = useAnimateOnScroll();
-  const { isVisible: isVisible2, ref: ref2 } = useAnimateOnScroll({
-    threshold: 0.2,
-  });
-  const { isVisible: isVisible3, ref: ref3 } = useAnimateOnScroll({
-    threshold: 0.3,
-  });
-
   return (
     <section
-      id='home'
-      className='min-h-screen flex items-center justify-center relative overflow-hidden'
+      id="home"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      <AnimatedBackground />
+      {/* Atmospheric background */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            'radial-gradient(120% 90% at 12% 0%, hsl(34 30% 93%) 0%, hsl(var(--background)) 55%)',
+        }}
+      />
+      <div
+        className="absolute -z-10 right-[-10%] top-[8%] h-[420px] w-[420px] rounded-full blur-[120px] opacity-[0.16]"
+        style={{ background: 'hsl(var(--brand))' }}
+      />
 
-      <div className='container-tight py-20 mt-16 relative z-10'>
-        <div className='flex flex-col items-center text-center gap-8 px-4'>
-          <span
-            ref={ref1}
-            className={`px-4 py-1 rounded-full text-xs font-medium bg-secondary/80 backdrop-blur-sm text-secondary-foreground uppercase tracking-wider ${
-              isVisible1 ? 'animate-fade-in' : 'opacity-0'
-            }`}
-          >
-            {personalDetails?.title}
+      <div className="container-tight w-full pt-32 pb-20">
+        {/* Meta row */}
+        <div
+          className="reveal flex items-center justify-between flex-wrap gap-4 mb-14 pb-6 border-b border-[hsl(var(--paper-line))]"
+          style={{ animationDelay: '0.05s' }}
+        >
+          <span className="eyebrow inline-flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-brand opacity-60 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
+            </span>
+            Available for work
           </span>
+          <span className="eyebrow hidden sm:block">
+            {personalDetails?.location ?? 'Remote'} · {new Date().getFullYear()}
+          </span>
+        </div>
 
-          <h1
-            ref={ref2}
-            className={`text-4xl md:text-5xl lg:text-7xl font-bold leading-tight max-w-5xl ${
-              isVisible2 ? 'animate-slide-in' : 'opacity-0'
-            }`}
+        {/* Headline */}
+        <h1 className="display-title text-[13vw] leading-[0.95] sm:text-7xl md:text-8xl lg:text-[7.5rem]">
+          <span className="reveal block" style={{ animationDelay: '0.12s' }}>
+            Building
+          </span>
+          <span
+            className="reveal block italic text-brand"
+            style={{ animationDelay: '0.22s' }}
           >
-            Crafting digital experiences with clean, elegant code
-          </h1>
+            thoughtful
+          </span>
+          <span className="reveal block" style={{ animationDelay: '0.32s' }}>
+            digital products
+          </span>
+        </h1>
 
+        {/* Sub row */}
+        <div className="mt-12 grid md:grid-cols-[1fr_auto] gap-10 items-end">
           <p
-            ref={ref3}
-            className={`text-lg md:text-xl text-muted-foreground max-w-2xl ${
-              isVisible3 ? 'animate-fade-in' : 'opacity-0'
-            }`}
-            style={{ animationDelay: '0.2s' }}
+            className="reveal text-body max-w-lg"
+            style={{ animationDelay: '0.42s' }}
           >
-            {personalDetails?.bio}
+            {personalDetails?.bio ??
+              'Software engineer crafting clean, responsive, and user-focused web experiences.'}
           </p>
 
           <div
-            className={`flex flex-col sm:flex-row gap-4 mt-6 ${
-              isVisible3 ? 'animate-fade-in' : 'opacity-0'
-            }`}
-            style={{ animationDelay: '0.4s' }}
+            className="reveal flex flex-col sm:flex-row gap-3"
+            style={{ animationDelay: '0.5s' }}
           >
-            <a
-              href='#projects'
-              className='bg-primary/90 backdrop-blur-sm text-primary-foreground px-8 py-3 rounded-md font-medium hover:bg-primary transition-all'
-            >
-              View My Work
+            <a href="#projects" className="btn-primary group">
+              View projects
+              <ArrowDownRight
+                size={16}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5"
+              />
             </a>
-            <a
-              href='#contact'
-              className='border border-input bg-background/60 backdrop-blur-sm hover:bg-secondary transition-colors text-foreground px-8 py-3 rounded-md font-medium'
-            >
-              Get In Touch
+            <a href="#contact" className="btn-ghost">
+              Get in touch
             </a>
           </div>
         </div>
       </div>
 
-      <a
-        href='#about'
-        className='absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground hover:text-foreground transition-colors z-10'
-        aria-label='Scroll down'
-      >
-        <ArrowDown size={24} />
-      </a>
+      {/* Bottom marquee-ish name line */}
+      <div className="container-tight w-full pb-8">
+        <div
+          className="reveal flex items-center justify-between eyebrow border-t border-[hsl(var(--paper-line))] pt-5"
+          style={{ animationDelay: '0.58s' }}
+        >
+          <span>{personalDetails?.name ?? 'Abdelkader Bouzomita'}</span>
+          <span className="text-muted-foreground/60">
+            {personalDetails?.title ?? 'Software Engineer'}
+          </span>
+        </div>
+      </div>
     </section>
   );
 };
