@@ -42,12 +42,15 @@
 
   html {
     scroll-behavior: smooth;
+    /* Global ~20% scale-down: all rem-based type/spacing renders like an 80% browser zoom */
+    font-size: 80%;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
-    font-size: 16.5px;
+    /* Relative so body copy scales with the reduced root size (16.5px * 0.8 ≈ 13.2px) */
+    font-size: 1.03125rem;
     line-height: 1.6;
     letter-spacing: -0.005em;
   }
