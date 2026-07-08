@@ -1,7 +1,6 @@
-import { useAnimateOnScroll } from '@/lib/animations';
-import { skillsIcons } from '@/lib/constants';
-import { contentfulClient } from '@/lib/contentfulClient';
 import { useEffect, useState } from 'react';
+import { contentfulClient } from '@/lib/contentfulClient';
+import SectionHeader from '@/components/SectionHeader';
 
 interface SkillCategory {
   id: string;
@@ -9,94 +8,61 @@ interface SkillCategory {
   skills: string[];
 }
 
-const SkillCard = ({
-  category,
-  index,
-}: {
-  category: SkillCategory;
-  index: number;
-}) => {
-  const { isVisible, ref } = useAnimateOnScroll({
-    threshold: 0.1,
-    rootMargin: '-20px',
-  });
-  const Icon = skillsIcons?.[index];
-
-  return (
-    <div
-      ref={ref}
-      className={`bg-white rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out transform ${
-        isVisible
-          ? 'opacity-100 translate-y-0 scale-100'
-          : 'opacity-0 translate-y-8 scale-95'
-      }`}
-      style={{
-        transitionDelay: `${index * 100}ms`,
-        willChange: 'transform, opacity',
-      }}
-    >
-      <div className='flex items-center gap-3 mb-4'>
-        <div className='bg-primary/10 text-primary p-3 rounded-lg'>
-          {Icon && <Icon size={20} />}
-        </div>
-        <h4 className='text-lg font-semibold'>{category.name}</h4>
-      </div>
-      <div className='flex flex-wrap gap-2'>
-        {category.skills.map((skill) => (
-          <span
-            key={skill}
-            className='px-2 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground'
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const Skills = () => {
   const [skillsItems, setSkills] = useState<SkillCategory[]>([]);
-  const { isVisible: headerVisible, ref: headerRef } = useAnimateOnScroll({
-    threshold: 0.2,
-    rootMargin: '-50px',
-  });
 
   useEffect(() => {
     contentfulClient
       .getEntries({ content_type: 'skills' })
       .then((response) => {
-        const items = response.items.map((item: any) => ({
-          id: item.sys.id,
-          ...item.fields,
-        }));
-        setSkills(items);
+        setSkills(
+          response.items.map((item) => ({
+            id: item.sys.id,
+            ...(item.fields as SkillCategory),
+          }))
+        );
       })
       .catch(console.error);
   }, []);
 
   return (
-    <section id='skills' className='section-padding bg-secondary'>
-      <div className='container-tight'>
-        <div
-          ref={headerRef}
-          className={`mb-16 text-center transition-all duration-500 ease-out ${
-            headerVisible ? 'animate-fade-in' : 'opacity-0 translate-y-4'
-          }`}
-        >
-          <h2 className='text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2'>
-            Skills
-          </h2>
-          <h3 className='text-3xl md:text-4xl font-bold mb-4'>My Expertise</h3>
-          <p className='text-muted-foreground max-w-2xl mx-auto'>
-            I specialize in creating responsive and intuitive user interfaces
-            with modern web technologies.
-          </p>
-        </div>
+    <section
+      id="skills"
+      className="section-padding section-muted border-t border-[hsl(var(--paper-line))]"
+    >
+      <div className="container-tight">
+        <SectionHeader
+          index="06"
+          label="Capabilities"
+          title="What I work with"
+          description="Technologies and tools I reach for when building modern web products."
+        />
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {skillsItems.map((category, index) => (
-            <SkillCard key={category.id} category={category} index={index} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+          {skillsItems.map((category, i) => (
+            <div
+              key={category.id}
+              className="grid grid-cols-[auto_1fr] gap-6 py-8 border-t border-[hsl(var(--paper-line))]"
+            >
+              <span className="font-mono text-xs text-brand pt-1.5">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h4 className="font-display text-xl md:text-2xl tracking-[-0.01em] mb-4">
+                  {category.name}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="font-mono text-xs px-3 py-1.5 rounded-full border border-border bg-background/60 text-foreground/80"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
