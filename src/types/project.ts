@@ -26,4 +26,5 @@ export interface CaseStudyContent {
   imageCaptions?: string[];
   role?: string;
   year?: string;
+  banner?: string;
 }

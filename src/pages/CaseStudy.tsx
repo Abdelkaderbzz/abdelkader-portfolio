@@ -53,7 +53,7 @@ const CaseStudy = () => {
     getCaseStudy(project.slug) ??
     generateCaseStudyFromDescription(project.title, project.description);
 
-  const heroImage = project.images[0]?.fields?.file?.url;
+  const heroImage = caseStudy.banner ?? project.images[0]?.fields?.file?.url;
   const displayTitle = getDisplayTitle(project.slug, project.title);
 
   return (

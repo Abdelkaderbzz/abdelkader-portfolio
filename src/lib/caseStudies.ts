@@ -5,6 +5,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'AI-Powered Higher Education Platform for Saudi Arabia',
     role: 'Lead Frontend Engineer',
     year: '2025',
+    banner: '/images/thekey-banner.png',
     overview:
       'We worked with The Key to shape an AI-powered higher education platform for Saudi Arabia where students take and schedule exams, complete assignments, and learn through an experience tuned to feel as personal as a private tutor — and where faculty and school managers run content, communities, and curriculum with AI sitting underneath every workflow.',
     challenge:
@@ -91,6 +92,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Browser-Based Screen Recording',
     role: 'Frontend Developer',
     year: '2023',
+    banner: '/images/gorec-banner.png',
     overview:
       'The app runs entirely in the browser with no downloads or installations required. Users can start recording instantly with a clean and intuitive interface, ideal for tutorials, demos, and quick captures.',
     challenge:
