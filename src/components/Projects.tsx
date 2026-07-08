@@ -1,253 +1,110 @@
-'use client';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { useAnimateOnScroll } from '@/lib/animations';
+import { useProjects } from '@/hooks/useProjects';
+import { Project } from '@/types/project';
+import SectionHeader from '@/components/SectionHeader';
 
-import { useAnimateOnScroll, useStaggeredAnimation } from '@/lib/animations';
-import { contentfulClient } from '@/lib/contentfulClient';
-import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
+const getDisplayTitle = (slug: string, title: string) =>
+  slug === 'thekey' ? 'The Key' : title;
 
-
-// Types
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  images: Array<{
-    fields: {
-      file: {
-        url: string;
-      };
-    };
-  }>;
-  link: string;
-  github?: string;
-  tags: string[];
-}
-
-interface ProjectsProps {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  projects?: Project[];
-  className?: string;
-}
-
-// Create a separate ProjectCard component
-const ProjectCard = ({
-  project,
-  animStyle,
-}: {
-  project: Project;
-  animStyle?: React.CSSProperties;
-  }) =>
-{
-  const { isVisible, ref } = useAnimateOnScroll({ threshold: 0.1 });
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === project.images.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? project.images.length - 1 : prev - 1
-    );
-  };
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const { ref, isVisible } = useAnimateOnScroll<HTMLAnchorElement>({
+    threshold: 0.15,
+  });
+  const heroImage = project.images[0]?.fields?.file?.url;
+  const displayTitle = getDisplayTitle(project.slug, project.title);
 
   return (
-    <div
+    <Link
+      to={`/work/${project.slug}`}
       ref={ref}
-      className={`group glass rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-primary/10 ${
-        isVisible ? 'animate-fade-in' : 'opacity-0'
-      }`}
-      style={animStyle}
+      className={`group block ${isVisible ? 'reveal' : 'opacity-0'}`}
+      style={{ animationDelay: `${(index % 2) * 0.1}s` }}
     >
-      <div className='relative aspect-video overflow-hidden'>
-        {/* Image gallery with transition */}
-        <div
-          className='flex transition-transform duration-500 ease-in-out'
-          style={{
-            transform: `translateX(-${currentImageIndex * 100}%)`,
-          }}
-        >
-          {project.images.map((img, imgIdx) => {
-            return (
-              <img
-                key={`${project.id ?? 'proj'}-img-${imgIdx}`}
-                src={img?.fields?.file?.url}
-                alt={`${project.title} screenshot ${imgIdx + 1}`}
-                className='object-cover min-w-full h-full'
-              />
-            );
-          })}
+      <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-muted">
+        {heroImage ? (
+          <img
+            src={heroImage}
+            alt={displayTitle}
+            className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-[1.04]"
+            style={{
+              transitionDuration: '900ms',
+              transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)',
+            }}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+            No preview
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-background/90 backdrop-blur-sm translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          <ArrowUpRight size={18} />
         </div>
+      </div>
 
-        <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black/60'></div>
+      <div className="mt-5 flex items-baseline justify-between gap-4">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-xs text-brand">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <h3 className="font-display text-2xl md:text-3xl tracking-[-0.02em] transition-colors group-hover:text-brand">
+            {displayTitle}
+          </h3>
+        </div>
+      </div>
 
-        {project.images.length > 1 && (
-          <>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevImage();
-              }}
-              className='absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-primary hover:text-white transition-colors duration-300 opacity-0 group-hover:opacity-100'
-              aria-label='Previous image'
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextImage();
-              }}
-              className='absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-primary hover:text-white transition-colors duration-300 opacity-0 group-hover:opacity-100'
-              aria-label='Next image'
-            >
-              <ChevronRight size={20} />
-            </button>
+      <p className="mt-2 text-muted-foreground leading-relaxed line-clamp-2 max-w-md">
+        {project.description}
+      </p>
 
-            {/* Enhanced indicator dots */}
-            <div className='absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 transition-opacity duration-300 opacity-80 group-hover:opacity-100'>
-              {project.images.map((_, imgIndex) => (
-                <button
-                  key={`${project.id ?? 'proj'}-dot-${imgIndex}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setCurrentImageIndex(imgIndex);
-                  }}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    currentImageIndex === imgIndex
-                      ? 'bg-primary scale-110'
-                      : 'bg-white/60 hover:bg-white/80'
-                  }`}
-                  aria-label={`Go to image ${imgIndex + 1}`}
-                />
-              ))}
-            </div>
-          </>
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+        {project.tags.slice(0, 4).map((tag) => (
+          <span key={tag} className="font-mono text-xs text-muted-foreground">
+            {tag}
+          </span>
+        ))}
+        {project.tags.length > 4 && (
+          <span className="font-mono text-xs text-muted-foreground/60">
+            +{project.tags.length - 4}
+          </span>
         )}
       </div>
-
-      <div className='p-6 relative'>
-        <div className='flex justify-between items-start mb-3'>
-          <h3 className='text-xl font-bold group-hover:text-primary transition-colors duration-300'>
-            {project.title}
-          </h3>
-          <div className='flex gap-3'>
-            {project.github && (
-              <a
-                href={project.github}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-muted-foreground hover:text-primary transition-colors duration-300 transform hover:scale-110'
-                aria-label={`GitHub repository for ${project.title}`}
-              >
-                <Github size={20} />
-              </a>
-            )}
-            <a
-              href={project.link}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-muted-foreground hover:text-primary transition-colors duration-300 transform hover:scale-110'
-              aria-label={`Visit live demo of ${project.title}`}
-            >
-              <ExternalLink size={20} />
-            </a>
-          </div>
-        </div>
-        <p className='text-muted-foreground mb-5 line-clamp-3 group-hover:line-clamp-none transition-all duration-500'>
-          {project.description}
-        </p>
-        <div className='flex flex-wrap gap-2 mt-4'>
-          {project.tags.map((tag, tagIdx) => (
-            <span
-              key={`${project.id ?? 'proj'}-tag-${tagIdx}`}
-              className='px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground hover:bg-primary/10 transition-colors duration-300'
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
+    </Link>
   );
 };
 
-const Projects = ({
-  title = 'Projects',
-  subtitle = 'Selected Work',
-  description = 'Here are some of my recent projects that showcase my skills and expertise.',
-  projects: initialProjects,
-  className = '',
-}: ProjectsProps) => {
-  const [projects, setProjects] = useState<Project[]>(initialProjects || []);
-  const { isVisible: headerVisible, ref: headerRef } = useAnimateOnScroll();
-  const projectAnimItems = useStaggeredAnimation(projects.length, 0.1);
-
-  useEffect(() => {
-      contentfulClient
-        .getEntries({ content_type: 'project' })
-        .then((response) => {
-          const items = response.items.map((item) => {
-            const fields = item.fields as unknown as Project;
-            return {
-              id: item.sys.id,
-              ...fields,
-            };
-          });
-          const uniqueById = Array.from(
-            new Map(items.map((it) => [String(it.id), it])).values()
-          );
-          if (uniqueById.length !== items.length) {
-            console.warn('Duplicate projects detected and removed.');
-          }
-          setProjects(uniqueById);
-        })
-        .catch(console.error);
-  }, [ initialProjects]);
+const Projects = () => {
+  const { projects, loading } = useProjects();
 
   return (
-    <section id='projects' className={`section-padding ${className}`}>
-      <div className='container-tight'>
-        <div
-          ref={headerRef}
-          className={`mb-16 text-center ${
-            headerVisible ? 'animate-fade-in' : 'opacity-0'
-          }`}
-        >
-          <h2 className='text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2'>
-            {title}
-          </h2>
-          <h3 className='text-3xl md:text-4xl font-bold mb-4'>{subtitle}</h3>
-          <p className='text-muted-foreground max-w-2xl mx-auto'>
-            {description}
-          </p>
-        </div>
+    <section id="projects" className="section-padding">
+      <div className="container-tight">
+        <SectionHeader
+          index="04"
+          label="Selected Work"
+          title="Projects"
+          description="Products I've helped design and build. Each opens into a detailed case study."
+        />
 
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12'>
-          {(() => {
-            try {
-              const keys = [...projects].reverse().map((p, i) => `${p.id ?? 'proj'}-${i}`);
-              const dupes = keys.filter((k, i) => keys.indexOf(k) !== i);
-              if (dupes.length) {
-                console.warn('Duplicate project keys detected:', dupes);
-              }
-            } catch (e) {
-              console.error('Error while checking project keys:', e);
-            }
-
-            return [...projects].reverse().map((project, index) => (
-              <ProjectCard
-                key={`${project.id ?? 'proj'}-${index}`}
-                project={project}
-                animStyle={projectAnimItems[index]?.style}
-              />
-            ));
-          })()}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="animate-pulse">
+                <div className="aspect-[4/3] rounded-xl bg-muted" />
+                <div className="mt-5 h-7 w-1/2 rounded bg-muted" />
+                <div className="mt-3 h-4 w-full rounded bg-muted" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 md:gap-y-20">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

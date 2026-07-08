@@ -1,6 +1,6 @@
-import { useAnimateOnScroll } from '@/lib/animations';
 import { useEffect, useState } from 'react';
 import { contentfulClient } from '@/lib/contentfulClient';
+import SectionHeader from '@/components/SectionHeader';
 
 interface Experience {
   id: string;
@@ -9,154 +9,142 @@ interface Experience {
   date: string;
   responsibilities: string[];
 }
+
 interface Education {
   institution: string;
   degree: string;
   location: string;
-  date: string; // Format: "Month YYYY - Month YYYY"
+  date: string;
 }
 
-const About = ({ personalDetails }) =>
-{
+const additionalEducation: Education[] = [
+  {
+    institution: 'HORIZON UNIVERSITY',
+    degree: "Master's Degree in Computer Science",
+    location: 'Sousse, Tunisia',
+    date: '2025 - 2027',
+  },
+];
 
-  const { isVisible: isVisible1, ref: ref1 } = useAnimateOnScroll();
-  const { isVisible: isVisible2, ref: ref2 } = useAnimateOnScroll({
-    threshold: 0.2,
-  });
-  const { isVisible: isVisible3, ref: ref3 } = useAnimateOnScroll({
-    threshold: 0.3,
-  });
-  const { isVisible: isVisible4, ref: ref4 } = useAnimateOnScroll({
-    threshold: 0.3,
-  });
+const About = ({ personalDetails }) => {
   const [experience, setExperience] = useState<Experience[]>([]);
   const [education, setEducation] = useState<Education[]>([]);
+
   useEffect(() => {
     contentfulClient
       .getEntries({ content_type: 'experience' })
       .then((response) => {
-        const items = response.items.map((item) => {
-          const fields = item.fields as unknown as Experience;
-          return {
-            id: item.sys.id,
-            ...fields,
-          };
-        });
-        setExperience(items);
+        setExperience(
+          response.items
+            .map((item) => ({
+              id: item.sys.id,
+              ...(item.fields as unknown as Experience),
+            }))
+            // The teaching role has its own dedicated section
+            .filter((job) => !/instructor/i.test(job.title ?? ''))
+        );
       })
       .catch(console.error);
+
     contentfulClient
       .getEntries({ content_type: 'education' })
       .then((response) => {
-        const items = response.items.map((item) => {
-          const fields = item.fields as unknown as Education;
-          return {
-            id: item.sys.id,
-            ...fields,
-          };
-        });
-        setEducation(items);
+        const fetched = response.items.map((item) => ({
+          id: item.sys.id,
+          ...(item.fields as unknown as Education),
+        }));
+        setEducation([...additionalEducation, ...fetched]);
       })
       .catch(console.error);
   }, []);
-  return (
-    <section id='about' className='section-padding bg-secondary'>
-      <div className='container-tight'>
-        <div
-          ref={ref1}
-          className={`mb-12 ${isVisible1 ? 'animate-fade-in' : 'opacity-0'}`}
-        >
-          <h2 className='text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2'>
-            About Me
-          </h2>
-          <h3 className='text-3xl md:text-4xl font-bold'>Get to know me</h3>
-        </div>
 
-        <div className='split'>
-          <div
-            ref={ref2}
-            className={`${isVisible2 ? 'animate-slide-in' : 'opacity-0'}`}
-          >
-            <div className='aspect-square overflow-hidden rounded-2xl relative'>
-              <div className='absolute inset-0 bg-black/10 z-10'></div>
+  return (
+    <section
+      id="about"
+      className="section-padding section-muted border-t border-[hsl(var(--paper-line))]"
+    >
+      <div className="container-tight">
+        <SectionHeader index="01" label="About" title="Get to know me" />
+
+        <div className="grid md:grid-cols-[260px_1fr] gap-10 md:gap-16 items-start mb-24">
+          <div className="relative">
+            <div className="aspect-[4/5] max-w-[260px] overflow-hidden rounded-xl border border-border">
               <img
                 src={personalDetails?.image?.fields?.file?.url}
                 alt={personalDetails?.name}
-                className='object-cover w-full h-[135%]'
+                className="h-full w-full object-cover"
               />
             </div>
+            <span className="absolute -bottom-3 -right-3 hidden sm:block font-mono text-xs bg-brand text-brand-foreground px-3 py-1.5 rounded-full">
+              {personalDetails?.title}
+            </span>
           </div>
 
-          <div
-            className={`space-y-6 flex flex-col justify-center ${
-              isVisible2 ? 'animate-slide-in-right' : 'opacity-0'
-            }`}
-          >
-            <div>
-              <h3 className='text-2xl font-bold mb-2'>
-                {personalDetails?.name}
-              </h3>
-              <p className='text-muted-foreground'>
-                {personalDetails?.title} based in {personalDetails?.location}
-              </p>
-            </div>
-
-            <p className='text-base md:text-lg'>{personalDetails?.longBio}</p>
+          <div>
+            <p className="font-display text-2xl md:text-3xl leading-snug tracking-[-0.01em] text-foreground/90">
+              {personalDetails?.name}, {personalDetails?.title} based in{' '}
+              {personalDetails?.location}.
+            </p>
+            <p className="text-body mt-6">{personalDetails?.longBio}</p>
           </div>
         </div>
 
-        <div
-          ref={ref3}
-          className={`mt-20 ${isVisible3 ? 'animate-fade-in' : 'opacity-0'}`}
-        >
-          <h3 className='text-2xl font-bold mb-6'>Experience</h3>
-
-          <div className='space-y-10'>
-            {experience?.map((job, index) => (
+        {/* Experience */}
+        <div className="mb-24">
+          <div className="flex items-baseline gap-3 mb-10">
+            <h3 className="font-display text-2xl md:text-3xl tracking-[-0.02em]">
+              Experience
+            </h3>
+          </div>
+          <div>
+            {experience.map((job) => (
               <div
-                key={index}
-                className='border-l-2 border-primary/20 pl-6 relative'
+                key={job.id}
+                className="grid md:grid-cols-[160px_1fr] gap-4 md:gap-10 py-8 border-t border-[hsl(var(--paper-line))] last:border-b"
               >
-                <div className='absolute w-4 h-4 rounded-full bg-primary top-0 -left-[9px]'></div>
-                <div className='mb-2'>
-                  <h4 className='text-xl font-semibold'>{job.title}</h4>
-                  <p className='text-muted-foreground'>
-                    {job.company} | {job.date}
-                  </p>
+                <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground pt-1">
+                  {job.date}
+                </span>
+                <div>
+                  <h4 className="text-xl font-medium">{job.title}</h4>
+                  <p className="text-muted-foreground mb-4">{job.company}</p>
+                  <ul className="space-y-2">
+                    {job.responsibilities.map((item, i) => (
+                      <li
+                        key={i}
+                        className="text-body text-foreground/70 pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-brand"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className='space-y-2 mt-4'>
-                  {job.responsibilities.map((achievement, i) => (
-                    <li
-                      key={i}
-                      className="text-muted-foreground before:content-['•'] before:mr-2 before:text-primary"
-                    >
-                      {achievement}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
         </div>
 
-        <div
-          ref={ref4}
-          className={`mt-20 ${isVisible4 ? 'animate-fade-in' : 'opacity-0'}`}
-        >
-          <h3 className='text-2xl font-bold mb-6'>Education</h3>
-
-          <div className='space-y-10'>
-            {education?.map((edu, index) => (
+        {/* Education */}
+        <div>
+          <div className="flex items-baseline gap-3 mb-10">
+            <h3 className="font-display text-2xl md:text-3xl tracking-[-0.02em]">
+              Education
+            </h3>
+          </div>
+          <div>
+            {education.map((edu, index) => (
               <div
                 key={index}
-                className='border-l-2 border-primary/20 pl-6 relative'
+                className="grid md:grid-cols-[160px_1fr] gap-4 md:gap-10 py-8 border-t border-[hsl(var(--paper-line))] last:border-b"
               >
-                <div className='absolute w-4 h-4 rounded-full bg-primary top-0 -left-[9px]'></div>
-                <div className='mb-2'>
-                  <h4 className='text-xl font-semibold'>{edu.institution}</h4>
-                  <p className='text-muted-foreground'>{edu.degree}</p>
-                  <p className='text-sm text-muted-foreground'>
-                    {edu.location} | {edu.date}
+                <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground pt-1">
+                  {edu.date}
+                </span>
+                <div>
+                  <h4 className="text-xl font-medium">{edu.institution}</h4>
+                  <p className="text-muted-foreground">{edu.degree}</p>
+                  <p className="text-sm text-muted-foreground/70 mt-1">
+                    {edu.location}
                   </p>
                 </div>
               </div>
