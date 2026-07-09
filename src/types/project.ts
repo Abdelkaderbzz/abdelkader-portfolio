@@ -17,6 +17,12 @@ export interface Project {
   tags: string[];
 }
 
+export interface Contributor {
+  name: string;
+  image: string;
+  role?: string;
+}
+
 export interface CaseStudyContent {
   subtitle: string;
   overview: string;
@@ -27,4 +33,5 @@ export interface CaseStudyContent {
   role?: string;
   year?: string;
   banner?: string;
+  contributors?: Contributor[];
 }

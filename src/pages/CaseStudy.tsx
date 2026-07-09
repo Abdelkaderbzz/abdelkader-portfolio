@@ -128,6 +128,45 @@ const CaseStudy = () => {
               <p className="text-sm">{project.tags.length} technologies</p>
             </div>
           </div>
+
+          {caseStudy.contributors && caseStudy.contributors.length > 0 && (
+            <div className="mt-10 pt-8 border-t border-[hsl(var(--paper-line))]">
+              <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-5">
+                Contributors
+              </p>
+              <div className="flex items-center pl-1">
+                {caseStudy.contributors.map((contributor, index) => (
+                  <div
+                    key={contributor.name}
+                    className="group relative -ml-3 first:ml-0 transition-[z-index] duration-200 hover:z-50"
+                    style={{ zIndex: caseStudy.contributors!.length - index }}
+                  >
+                    <div className="h-11 w-11 overflow-hidden rounded-full border-2 border-background bg-muted ring-1 ring-border transition-transform duration-200 group-hover:scale-110 group-hover:z-50">
+                      <img
+                        src={contributor.image}
+                        alt={contributor.name}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div
+                      role="tooltip"
+                      className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-50 w-max max-w-[200px] -translate-x-1/2 rounded-lg border border-border bg-card px-3 py-2 text-center opacity-0 shadow-md transition-all duration-200 group-hover:opacity-100"
+                    >
+                      <p className="text-xs font-medium leading-snug">
+                        {contributor.name}
+                      </p>
+                      {contributor.role && (
+                        <p className="mt-0.5 text-[11px] text-muted-foreground leading-snug">
+                          {contributor.role}
+                        </p>
+                      )}
+                      <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-border" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
