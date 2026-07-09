@@ -1,4 +1,27 @@
-import { CaseStudyContent } from '@/types/project';
+import { CaseStudyContent, Contributor } from '@/types/project';
+
+const intejContributors: Contributor[] = [
+  {
+    name: 'Youssef Zekri',
+    image: '/images/contributors/youssef-zekri.png',
+    role: 'Developer',
+  },
+  {
+    name: 'Marwen Shili',
+    image: '/images/contributors/marwen-shili.png',
+    role: 'Developer',
+  },
+  {
+    name: 'Abderahim Selmi',
+    image: '/images/contributors/dummy-avatar.svg',
+    role: 'Developer',
+  },
+  {
+    name: 'Abdelkader Bouzomita',
+    image: '/images/avatar.png',
+    role: 'Full-Stack Developer',
+  },
+];
 
 export const caseStudies: Record<string, CaseStudyContent> = {
   thekey: {
@@ -6,6 +29,33 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     role: 'Lead Frontend Engineer',
     year: '2025',
     banner: '/images/thekey-banner.png',
+    contributors: [
+      {
+        name: 'Rayen Mabrouk',
+        image: '/images/contributors/rayen-mabrouk.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Louay Zouaoui',
+        image: '/images/contributors/louay-zouaoui.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Olympiah Otenio',
+        image: '/images/contributors/dummy-avatar.svg',
+        role: 'QA Tester',
+      },
+      {
+        name: 'Ahmed Jazziri',
+        image: '/images/contributors/dummy-avatar.svg',
+        role: 'DevOps',
+      },
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Lead Frontend Engineer',
+      },
+    ],
     overview:
       'We worked with The Key to shape an AI-powered higher education platform for Saudi Arabia where students take and schedule exams, complete assignments, and learn through an experience tuned to feel as personal as a private tutor — and where faculty and school managers run content, communities, and curriculum with AI sitting underneath every workflow.',
     challenge:
@@ -27,6 +77,23 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Productivity Club Member Platform',
     role: 'Full-Stack Developer',
     year: '2024',
+    banner: '/images/intej-member-banner.png',
+    contributors: intejContributors,
+    overview:
+      'Ntaj Member App is a platform that allows members to manage their tasks, set goals, and track their progress within productivity clubs. It helps users stay accountable through weekly updates, collaboration, and structured goal tracking.',
+    challenge:
+      'Productivity clubs needed a dedicated space where members could track goals, share progress, and stay accountable — separate from generic task apps that lack the community structure clubs require.',
+    solution:
+      'Built a member-focused app with goal setting, weekly progress updates, and club collaboration features. The interface prioritizes clarity and habit formation, making it easy for members to log updates and see collective progress.',
+    results:
+      'Members gained a structured way to stay accountable within their clubs, with measurable progress tracking and a shared workspace that reinforces community-driven productivity.',
+  },
+  'intej-member': {
+    subtitle: 'Productivity Club Member Platform',
+    role: 'Full-Stack Developer',
+    year: '2024',
+    banner: '/images/intej-member-banner.png',
+    contributors: intejContributors,
     overview:
       'Ntaj Member App is a platform that allows members to manage their tasks, set goals, and track their progress within productivity clubs. It helps users stay accountable through weekly updates, collaboration, and structured goal tracking.',
     challenge:
@@ -40,6 +107,23 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Goal Tracking & Productivity Platform',
     role: 'Full-Stack Developer',
     year: '2024',
+    banner: '/images/intej-banner.png',
+    contributors: intejContributors,
+    overview:
+      'Ntaj is a platform that helps users organize tasks, set goals, and track their progress. It promotes productivity through collaboration and structured goal setting.',
+    challenge:
+      'Users struggled to maintain momentum on long-term goals without a system that combined task management, progress visualization, and community accountability.',
+    solution:
+      'Designed and built a platform centered on structured goal setting with task breakdown, progress dashboards, and collaborative features that keep users engaged over time.',
+    results:
+      'Users can organize their work, track milestones, and collaborate with others — turning abstract goals into actionable, measurable progress.',
+  },
+  intej: {
+    subtitle: 'Goal Tracking & Productivity Platform',
+    role: 'Full-Stack Developer',
+    year: '2024',
+    banner: '/images/intej-banner.png',
+    contributors: intejContributors,
     overview:
       'Ntaj is a platform that helps users organize tasks, set goals, and track their progress. It promotes productivity through collaboration and structured goal setting.',
     challenge:
@@ -66,6 +150,45 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Personal Spiritual Progress Tracker',
     role: 'Frontend Developer',
     year: '2024',
+    banner: '/images/ramadan-tracker-banner.png',
+    contributors: [
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Frontend Developer',
+      },
+      {
+        name: 'www-samcom',
+        image: '/images/contributors/www-samcom.png',
+        role: 'Developer',
+      },
+    ],
+    overview:
+      'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
+    challenge:
+      'During Ramadan, users wanted a simple way to track spiritual practices across prayers, duas, and Quran recitation — without juggling multiple apps or paper logs.',
+    solution:
+      'Created an intuitive tracking interface with daily logging, progress visualization, and insights that help users reflect on their spiritual journey throughout the month.',
+    results:
+      'Users gained a single, focused tool to monitor and improve their Ramadan practices, with clear progress feedback that motivates consistency.',
+  },
+  ramadhantracker: {
+    subtitle: 'Personal Spiritual Progress Tracker',
+    role: 'Frontend Developer',
+    year: '2024',
+    banner: '/images/ramadan-tracker-banner.png',
+    contributors: [
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Frontend Developer',
+      },
+      {
+        name: 'www-samcom',
+        image: '/images/contributors/www-samcom.png',
+        role: 'Developer',
+      },
+    ],
     overview:
       'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
     challenge:
@@ -79,6 +202,95 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Scalable Customer Support Platform',
     role: 'Full-Stack Developer',
     year: '2024',
+    banner: '/images/takipopups-banner.png',
+    contributors: [
+      {
+        name: 'Amir Ben Ahmed',
+        image: '/images/contributors/amir-ben-ahmed.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Iyed Sbai',
+        image: '/images/contributors/iyed-sbai.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Aymen Mosrati',
+        image: '/images/contributors/aymen-mosrati.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Moataz Hjaiji',
+        image: '/images/contributors/moataz-hjaiji.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Amine Slimani',
+        image: '/images/contributors/amine-slimani.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Tarek Gzgz',
+        image: '/images/contributors/tarek-gzgz.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Full-Stack Developer',
+      },
+    ],
+    overview:
+      'Scalable customer support service with real-time messaging, personalized product tours, dynamic banners, custom popups, and targeted content. Supports team collaboration, permission management, and automation.',
+    challenge:
+      'Businesses needed a unified support platform that goes beyond chat — combining real-time messaging with in-app guidance, targeted content, and team collaboration at scale.',
+    solution:
+      'Built a modular support platform with real-time messaging, customizable popups and banners, product tours, role-based permissions, and team workflows — all from a single admin surface.',
+    results:
+      'Support teams can engage customers in real time while delivering contextual guidance and targeted content, reducing friction and improving resolution rates.',
+  },
+  takipopups: {
+    subtitle: 'Scalable Customer Support Platform',
+    role: 'Full-Stack Developer',
+    year: '2024',
+    banner: '/images/takipopups-banner.png',
+    contributors: [
+      {
+        name: 'Amir Ben Ahmed',
+        image: '/images/contributors/amir-ben-ahmed.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Iyed Sbai',
+        image: '/images/contributors/iyed-sbai.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Aymen Mosrati',
+        image: '/images/contributors/aymen-mosrati.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Moataz Hjaiji',
+        image: '/images/contributors/moataz-hjaiji.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Amine Slimani',
+        image: '/images/contributors/amine-slimani.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Tarek Gzgz',
+        image: '/images/contributors/tarek-gzgz.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Full-Stack Developer',
+      },
+    ],
     overview:
       'Scalable customer support service with real-time messaging, personalized product tours, dynamic banners, custom popups, and targeted content. Supports team collaboration, permission management, and automation.',
     challenge:
@@ -93,6 +305,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     role: 'Frontend Developer',
     year: '2023',
     banner: '/images/gorec-banner.png',
+    contributors: [
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Frontend Developer',
+      },
+    ],
     overview:
       'The app runs entirely in the browser with no downloads or installations required. Users can start recording instantly with a clean and intuitive interface, ideal for tutorials, demos, and quick captures.',
     challenge:
@@ -119,6 +338,34 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Digital Safety Ecosystem for Families',
     role: 'Full-Stack Developer',
     year: '2024',
+    banner: '/images/aina-salsabila-banner.png',
+    contributors: [
+      {
+        name: 'Ahmed Idrissi Radi',
+        image: '/images/contributors/ahmed-idrissi-radi.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Mohamed Sabrie',
+        image: '/images/contributors/mohamed-sabrie.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Ahmed Elbehairy',
+        image: '/images/contributors/ahmed-elbehairy.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Mazen Gassar',
+        image: '/images/contributors/mazen-gassar.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Full-Stack Developer',
+      },
+    ],
     overview:
       'A comprehensive ecosystem platform — web, mobile, and desktop — designed to protect Muslims from inappropriate content online. The app provides robust filtering, monitoring, and educational tools.',
     challenge:
@@ -133,6 +380,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     role: 'Frontend Developer',
     year: '2023',
     banner: '/images/chronomanager-banner.png',
+    contributors: [
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Frontend Developer',
+      },
+    ],
     overview:
       'An intuitive task management app featuring folders, lists, drag-and-drop, and three powerful views: Kanban, Priority, and List — designed to keep you organized and in control.',
     challenge:
@@ -146,6 +400,19 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     subtitle: 'Real-Time Chat & Event Management',
     role: 'Full-Stack Developer',
     year: '2023',
+    banner: '/images/onq-banner.png',
+    contributors: [
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Full-Stack Developer',
+      },
+      {
+        name: 'Tarek Gzgz',
+        image: '/images/contributors/tarek-gzgz.png',
+        role: 'Full-Stack Developer',
+      },
+    ],
     overview:
       'onQ is an innovative chat application that enables real-time messaging, group creation, and event management, streamlining communication and organization for users.',
     challenge:
@@ -154,6 +421,58 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       'Developed a real-time chat platform with group management, event scheduling, and integrated organization features — keeping communication and planning in sync.',
     results:
       'Users communicate and organize events from a single app, reducing context switching and keeping teams aligned.',
+  },
+  arabizzi: {
+    subtitle: 'Arabizi to Arabic Chrome Extension',
+    role: 'Frontend Developer',
+    year: '2024',
+    banner: '/images/arabizzi-banner.png',
+    contributors: [
+      {
+        name: 'Aziz Bacha',
+        image: '/images/contributors/aziz-bacha.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Frontend Developer',
+      },
+    ],
+    overview:
+      'Type Arabizi is a free Chrome extension that instantly converts Arabizi — Arabic written with Latin characters and numbers — into proper Arabic script as you type.',
+    challenge:
+      'Arabizi is widely used in messaging and social media, but switching between Latin and Arabic keyboards breaks flow and slows communication for bilingual users.',
+    solution:
+      'Built a lightweight Chrome extension with real-time transliteration — type Arabizi in any text field and get Arabic output instantly, with zero configuration.',
+    results:
+      'Users can communicate naturally in Arabizi while producing clean Arabic text, removing friction from everyday typing across the web.',
+  },
+  'type-arabizi': {
+    subtitle: 'Arabizi to Arabic Chrome Extension',
+    role: 'Frontend Developer',
+    year: '2024',
+    banner: '/images/arabizzi-banner.png',
+    contributors: [
+      {
+        name: 'Aziz Bacha',
+        image: '/images/contributors/aziz-bacha.png',
+        role: 'Developer',
+      },
+      {
+        name: 'Abdelkader Bouzomita',
+        image: '/images/avatar.png',
+        role: 'Frontend Developer',
+      },
+    ],
+    overview:
+      'Type Arabizi is a free Chrome extension that instantly converts Arabizi — Arabic written with Latin characters and numbers — into proper Arabic script as you type.',
+    challenge:
+      'Arabizi is widely used in messaging and social media, but switching between Latin and Arabic keyboards breaks flow and slows communication for bilingual users.',
+    solution:
+      'Built a lightweight Chrome extension with real-time transliteration — type Arabizi in any text field and get Arabic output instantly, with zero configuration.',
+    results:
+      'Users can communicate naturally in Arabizi while producing clean Arabic text, removing friction from everyday typing across the web.',
   },
 };
 
