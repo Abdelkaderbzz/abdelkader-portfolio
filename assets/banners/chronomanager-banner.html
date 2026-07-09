@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 869px;
+        height: 217px;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      .banner {
+        position: relative;
+        width: 869px;
+        height: 217px;
+        background: linear-gradient(90deg, #0a0a0a 0%, #111111 55%, #141414 100%);
+        overflow: hidden;
+      }
+
+      .glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 78% 50%,
+          rgba(245, 176, 65, 0.08) 0%,
+          transparent 55%
+        );
+      }
+
+      .arcs {
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 240px;
+        height: 240px;
+        pointer-events: none;
+      }
+
+      .arc {
+        position: absolute;
+        border-radius: 50%;
+        border: 3.5px solid transparent;
+      }
+
+      .arc-1 {
+        width: 210px;
+        height: 210px;
+        right: 0;
+        top: 15px;
+        border-top-color: rgba(245, 176, 65, 0.55);
+        border-right-color: rgba(245, 176, 65, 0.18);
+        transform: rotate(25deg);
+      }
+
+      .arc-2 {
+        width: 165px;
+        height: 165px;
+        right: 22px;
+        top: 38px;
+        border-top-color: rgba(232, 168, 56, 0.42);
+        border-left-color: rgba(232, 168, 56, 0.15);
+        transform: rotate(5deg);
+      }
+
+      .arc-3 {
+        width: 118px;
+        height: 118px;
+        right: 48px;
+        top: 62px;
+        border-bottom-color: rgba(245, 176, 65, 0.35);
+        border-right-color: rgba(245, 176, 65, 0.1);
+        transform: rotate(38deg);
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 72px 0 64px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+      }
+
+      .logo-mark {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 3px solid #f5b041;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .logo-mark svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .brand-name {
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .tagline {
+        max-width: 220px;
+        text-align: right;
+        color: #d4d4d4;
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <div class="glow"></div>
+      <div class="arcs">
+        <div class="arc arc-1"></div>
+        <div class="arc arc-2"></div>
+        <div class="arc arc-3"></div>
+      </div>
+      <div class="content">
+        <div class="brand">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <line x1="12" y1="12" x2="12" y2="7" stroke="#f5b041" stroke-width="2" stroke-linecap="round" />
+              <line x1="12" y1="12" x2="16" y2="12" stroke="#f5b041" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <span class="brand-name">ChronoManager</span>
+        </div>
+        <p class="tagline">
+          Visual Task<br />Management Application
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
