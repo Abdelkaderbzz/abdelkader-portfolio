@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 869px;
+        height: 217px;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      .banner {
+        position: relative;
+        width: 869px;
+        height: 217px;
+        background: linear-gradient(
+          90deg,
+          #faf7f4 0%,
+          #f5ebe4 55%,
+          #efe3db 100%
+        );
+        overflow: hidden;
+      }
+
+      /* Decorative arcs — same placement as The Key / onQ */
+      .arcs {
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 240px;
+        height: 240px;
+        pointer-events: none;
+      }
+
+      .arc {
+        position: absolute;
+        border-radius: 50%;
+        border: 3.5px solid transparent;
+      }
+
+      .arc-1 {
+        width: 210px;
+        height: 210px;
+        right: 0;
+        top: 15px;
+        border-top-color: rgba(209, 65, 36, 0.55);
+        border-right-color: rgba(209, 65, 36, 0.2);
+        transform: rotate(25deg);
+      }
+
+      .arc-2 {
+        width: 165px;
+        height: 165px;
+        right: 22px;
+        top: 38px;
+        border-top-color: rgba(193, 83, 59, 0.45);
+        border-left-color: rgba(193, 83, 59, 0.15);
+        transform: rotate(5deg);
+      }
+
+      .arc-3 {
+        width: 118px;
+        height: 118px;
+        right: 48px;
+        top: 62px;
+        border-bottom-color: rgba(229, 83, 61, 0.38);
+        border-right-color: rgba(229, 83, 61, 0.12);
+        transform: rotate(38deg);
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 72px 0 64px;
+      }
+
+      /* Left: icon + logo — mirrors The Key / onQ */
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        flex-shrink: 0;
+      }
+
+      .logo-mark {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        background: #d14124;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .logo-mark svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .logo-text {
+        height: 44px;
+        width: auto;
+        display: block;
+        filter: none;
+      }
+
+      /* Right: tagline — same position/style as The Key / onQ */
+      .tagline {
+        max-width: 240px;
+        text-align: right;
+        color: #111111;
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <div class="arcs">
+        <div class="arc arc-1"></div>
+        <div class="arc arc-2"></div>
+        <div class="arc arc-3"></div>
+      </div>
+      <div class="content">
+        <div class="brand">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M12 5C7 5 3.2 8.1 2 12c1.2 3.9 5 7 10 7s8.8-3.1 10-7c-1.2-3.9-5-7-10-7Z"
+                stroke="#fff"
+                stroke-width="1.8"
+              />
+              <circle cx="12" cy="12" r="3.2" fill="#fff" />
+            </svg>
+          </div>
+          <img
+            class="logo-text"
+            src="logo.png"
+            alt="Ain Al-Sabil"
+          />
+        </div>
+        <p class="tagline">
+          Digital Safety Ecosystem<br />for Families
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
