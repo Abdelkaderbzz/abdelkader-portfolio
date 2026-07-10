@@ -164,13 +164,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       },
     ],
     overview:
-      'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
+      'Ramadan Tracker is a progressive web app built to help Muslims stay consistent with their worship throughout Ramadan. It brings prayer tracking, Quran progress, duas, dhikr, and daily spiritual habits into one calm, focused experience, with clear insights that make it easy to see how the month is going.',
     challenge:
-      'During Ramadan, users wanted a simple way to track spiritual practices across prayers, duas, and Quran recitation — without juggling multiple apps or paper logs.',
+      'During Ramadan, staying on top of worship often means switching between prayer apps, notes, paper logs, and mental checklists. That fragmentation makes it hard to build consistency, reflect on progress, or stay motivated across the full 30 days. Users needed one simple tool that could track their spiritual practices daily without adding friction to an already meaningful month.',
     solution:
-      'Created an intuitive tracking interface with daily logging, progress visualization, and insights that help users reflect on their spiritual journey throughout the month.',
+      'We designed an intuitive, all-in-one tracking experience centered around daily logging and visible progress. Users can monitor prayers, Quran recitation, duas, dhikr, fasting, and good deeds from a single dashboard, with worship stats, achievement badges, and a Ramadan journey section for goals and reflections. Live prayer times, a Hijri calendar, curated duas, multilingual support (Arabic, English, and French), and installable PWA functionality make the app practical, accessible, and easy to return to every day.',
     results:
-      'Users gained a single, focused tool to monitor and improve their Ramadan practices, with clear progress feedback that motivates consistency.',
+      'Users gained a single, focused tool to monitor and improve their Ramadan practices, replacing scattered tracking with one clear system. With daily progress feedback, milestone badges, and reflection tools, the app helps users stay consistent, recognize their effort, and move through Ramadan with greater awareness and motivation.',
   },
   ramadhantracker: {
     subtitle: 'Personal Spiritual Progress Tracker',
@@ -190,13 +190,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       },
     ],
     overview:
-      'A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the month.',
+      'Ramadan Tracker is a progressive web app built to help Muslims stay consistent with their worship throughout Ramadan. It brings prayer tracking, Quran progress, duas, dhikr, and daily spiritual habits into one calm, focused experience, with clear insights that make it easy to see how the month is going.',
     challenge:
-      'During Ramadan, users wanted a simple way to track spiritual practices across prayers, duas, and Quran recitation — without juggling multiple apps or paper logs.',
+      'During Ramadan, staying on top of worship often means switching between prayer apps, notes, paper logs, and mental checklists. That fragmentation makes it hard to build consistency, reflect on progress, or stay motivated across the full 30 days. Users needed one simple tool that could track their spiritual practices daily without adding friction to an already meaningful month.',
     solution:
-      'Created an intuitive tracking interface with daily logging, progress visualization, and insights that help users reflect on their spiritual journey throughout the month.',
+      'We designed an intuitive, all-in-one tracking experience centered around daily logging and visible progress. Users can monitor prayers, Quran recitation, duas, dhikr, fasting, and good deeds from a single dashboard, with worship stats, achievement badges, and a Ramadan journey section for goals and reflections. Live prayer times, a Hijri calendar, curated duas, multilingual support (Arabic, English, and French), and installable PWA functionality make the app practical, accessible, and easy to return to every day.',
     results:
-      'Users gained a single, focused tool to monitor and improve their Ramadan practices, with clear progress feedback that motivates consistency.',
+      'Users gained a single, focused tool to monitor and improve their Ramadan practices, replacing scattered tracking with one clear system. With daily progress feedback, milestone badges, and reflection tools, the app helps users stay consistent, recognize their effort, and move through Ramadan with greater awareness and motivation.',
   },
   'custom-service-platform': {
     subtitle: 'Scalable Customer Support Platform',
