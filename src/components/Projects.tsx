@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useAnimateOnScroll } from '@/lib/animations';
 import { useProjects } from '@/hooks/useProjects';
+import { getCaseStudy } from '@/lib/caseStudies';
 import { Project } from '@/types/project';
 import SectionHeader from '@/components/SectionHeader';
 
@@ -12,7 +13,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   const { ref, isVisible } = useAnimateOnScroll<HTMLAnchorElement>({
     threshold: 0.15,
   });
-  const heroImage = project.images[0]?.fields?.file?.url;
+  const banner = getCaseStudy(project.slug)?.banner;
+  const heroImage = banner ?? project.images[0]?.fields?.file?.url;
   const displayTitle = getDisplayTitle(project.slug, project.title);
 
   return (
@@ -22,12 +24,16 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       className={`group block ${isVisible ? 'reveal' : 'opacity-0'}`}
       style={{ animationDelay: `${(index % 2) * 0.1}s` }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-muted">
+      <div
+        className={`relative overflow-hidden rounded-xl border border-border bg-muted ${
+          banner ? 'aspect-[869/217]' : 'aspect-[4/3]'
+        }`}
+      >
         {heroImage ? (
           <img
             src={heroImage}
             alt={displayTitle}
-            className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-[1.04]"
+            className="absolute inset-0 h-full w-full object-cover object-center transition-transform group-hover:scale-[1.02]"
             style={{
               transitionDuration: '900ms',
               transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)',
@@ -92,7 +98,7 @@ const Projects = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="aspect-[4/3] rounded-xl bg-muted" />
+                <div className="aspect-[869/217] rounded-xl bg-muted" />
                 <div className="mt-5 h-7 w-1/2 rounded bg-muted" />
                 <div className="mt-3 h-4 w-full rounded bg-muted" />
               </div>
