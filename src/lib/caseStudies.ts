@@ -23,6 +23,50 @@ const intejContributors: Contributor[] = [
   },
 ];
 
+const intejAdminCaseStudy = {
+  overview:
+    'Intej (Ntaj) is a goal-tracking and productivity platform built for Personal Productivity Clubs, where members organize tasks, set goals, and track progress together. Instead of treating time management as the goal, the platform focuses on effective task management and community accountability, helping clubs turn ambitions into measurable achievements through structured goal setting, progress dashboards, and collaborative workflows.',
+  challenge:
+    'Productivity clubs needed more than a generic task app. Leaders had no dedicated way to run clubs, track member progress at scale, or keep people accountable beyond scattered chats and spreadsheets. Members struggled to stay consistent on long-term goals without a system that combined task breakdown, visible progress, and the social structure clubs depend on.',
+  solution:
+    'We designed and built a club-first admin platform centered on structured goal setting, task organization, and progress visualization. Club leaders can manage members, monitor collective momentum, and run productivity workflows from one surface, while members benefit from clear milestones, shared accountability, and collaboration features that keep engagement high over time.',
+  results:
+    'Clubs gained a purpose-built system to run their programs with clarity and consistency. Leaders can organize work, track milestones across members, and reinforce community-driven productivity, turning abstract goals into actionable, measurable progress for entire groups.',
+};
+
+const intejMemberCaseStudy = {
+  overview:
+    'The Intej Member App is the member-facing companion to Personal Productivity Clubs, giving individuals a dedicated space to manage tasks, set personal goals, and track progress within their club. Weekly updates, shared accountability, and structured goal tracking help members stay focused and consistent between club sessions.',
+  challenge:
+    'Club members needed a focused experience separate from the admin tools, but still connected to their club structure. Generic productivity apps lacked the weekly rhythm, peer accountability, and progress rituals that make productivity clubs work, leaving members to track goals in isolation.',
+  solution:
+    'We built a member-focused app with goal setting, weekly progress updates, and club collaboration features designed around habit formation. The interface prioritizes clarity and momentum, making it easy for members to log updates, reflect on progress, and see how their effort fits into the group\'s shared journey.',
+  results:
+    'Members gained a structured way to stay accountable within their clubs, with measurable progress tracking and a shared workspace that reinforces community-driven productivity long after each meeting ends.',
+};
+
+const ainaSalsabilaCaseStudy = {
+  overview:
+    'Aynā Salsabīl (عين السبيل) is a digital safety ecosystem for Muslim families, spanning web, mobile, and desktop clients. It combines layered content protection across Windows, Android, and router-level filtering with monitoring dashboards, protection-level controls, and educational resources, helping families build safer online habits through technology that protects, guides, and empowers.',
+  challenge:
+    'Families needed more than a browser blocker. Inappropriate content reaches users across phones, computers, and home networks, while single-device tools leave gaps and fail to combine filtering, monitoring, and education in one coherent experience. Parents wanted practical, multi-layer protection they could activate across every device in the home.',
+  solution:
+    'We built a cross-platform ecosystem with device-specific activation flows for Windows, Android, and routers, each explained in clear Arabic-first onboarding. The platform surfaces protection levels, customer support, and educational content from a unified experience, applying multiple security layers rather than promising a single fix. Built with React, TypeScript, Expo, and Tailwind CSS at Mafaza, the product delivers responsive web and mobile interfaces for a distributed team serving the Muslim community.',
+  results:
+    'Families can activate protection across the devices that matter most, understand how each layer improves safety, and access guidance alongside the tooling itself. The result is a more complete digital safety experience that helps users move from reactive blocking to informed, sustained protection at home.',
+};
+
+const onqCaseStudy = {
+  overview:
+    'onQ is a real-time chat and event management platform that brings messaging, group collaboration, and scheduling into one focused workspace. Users create groups with invite links, chat in shared rooms, plan events from an embedded calendar, and keep files, images, and links accessible alongside the conversation, all without switching between separate chat and calendar tools.',
+  challenge:
+    'Teams were fragmented across messaging apps, calendars, and shared drives. Planning in one tool and discussing in another meant constant context-switching, while group onboarding, event coordination, and day-to-day communication never lived in the same place.',
+  solution:
+    'We built a unified platform with real-time messaging, group creation and management, invite-link onboarding, an integrated calendar, and structured event flows with title, description, location, date, time, and duration. Messages and scheduled events share the same timeline, member lists and shared resources stay visible in the sidebar, and notifications keep groups aligned from a single onQ workspace.',
+  results:
+    'Users communicate and organize from one app, reducing context switching and keeping plans tied to the conversations around them. Groups get a shared home for chat, events, and resources instead of stitching together multiple tools.',
+};
+
 export const caseStudies: Record<string, CaseStudyContent> = {
   thekey: {
     subtitle: 'AI-Powered Higher Education Platform for Saudi Arabia',
@@ -79,14 +123,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     year: '2024',
     banner: '/images/intej-member-banner.png',
     contributors: intejContributors,
-    overview:
-      'Ntaj Member App is a platform that allows members to manage their tasks, set goals, and track their progress within productivity clubs. It helps users stay accountable through weekly updates, collaboration, and structured goal tracking.',
-    challenge:
-      'Productivity clubs needed a dedicated space where members could track goals, share progress, and stay accountable — separate from generic task apps that lack the community structure clubs require.',
-    solution:
-      'Built a member-focused app with goal setting, weekly progress updates, and club collaboration features. The interface prioritizes clarity and habit formation, making it easy for members to log updates and see collective progress.',
-    results:
-      'Members gained a structured way to stay accountable within their clubs, with measurable progress tracking and a shared workspace that reinforces community-driven productivity.',
+    ...intejMemberCaseStudy,
   },
   'intej-member': {
     subtitle: 'Productivity Club Member Platform',
@@ -94,14 +131,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     year: '2024',
     banner: '/images/intej-member-banner.png',
     contributors: intejContributors,
-    overview:
-      'Ntaj Member App is a platform that allows members to manage their tasks, set goals, and track their progress within productivity clubs. It helps users stay accountable through weekly updates, collaboration, and structured goal tracking.',
-    challenge:
-      'Productivity clubs needed a dedicated space where members could track goals, share progress, and stay accountable — separate from generic task apps that lack the community structure clubs require.',
-    solution:
-      'Built a member-focused app with goal setting, weekly progress updates, and club collaboration features. The interface prioritizes clarity and habit formation, making it easy for members to log updates and see collective progress.',
-    results:
-      'Members gained a structured way to stay accountable within their clubs, with measurable progress tracking and a shared workspace that reinforces community-driven productivity.',
+    ...intejMemberCaseStudy,
   },
   ntaj: {
     subtitle: 'Goal Tracking & Productivity Platform',
@@ -109,14 +139,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     year: '2024',
     banner: '/images/intej-banner.png',
     contributors: intejContributors,
-    overview:
-      'Ntaj is a platform that helps users organize tasks, set goals, and track their progress. It promotes productivity through collaboration and structured goal setting.',
-    challenge:
-      'Users struggled to maintain momentum on long-term goals without a system that combined task management, progress visualization, and community accountability.',
-    solution:
-      'Designed and built a platform centered on structured goal setting with task breakdown, progress dashboards, and collaborative features that keep users engaged over time.',
-    results:
-      'Users can organize their work, track milestones, and collaborate with others — turning abstract goals into actionable, measurable progress.',
+    ...intejAdminCaseStudy,
   },
   intej: {
     subtitle: 'Goal Tracking & Productivity Platform',
@@ -124,14 +147,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
     year: '2024',
     banner: '/images/intej-banner.png',
     contributors: intejContributors,
-    overview:
-      'Ntaj is a platform that helps users organize tasks, set goals, and track their progress. It promotes productivity through collaboration and structured goal setting.',
-    challenge:
-      'Users struggled to maintain momentum on long-term goals without a system that combined task management, progress visualization, and community accountability.',
-    solution:
-      'Designed and built a platform centered on structured goal setting with task breakdown, progress dashboards, and collaborative features that keep users engaged over time.',
-    results:
-      'Users can organize their work, track milestones, and collaborate with others — turning abstract goals into actionable, measurable progress.',
+    ...intejAdminCaseStudy,
   },
   sellfy: {
     subtitle: 'E-Commerce Platform for Digital & Physical Products',
@@ -366,14 +382,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
         role: 'Full-Stack Developer',
       },
     ],
-    overview:
-      'A comprehensive ecosystem platform — web, mobile, and desktop — designed to protect Muslims from inappropriate content online. The app provides robust filtering, monitoring, and educational tools.',
-    challenge:
-      'Families needed a cross-platform solution that combines content filtering, activity monitoring, and educational resources — not just a browser blocker.',
-    solution:
-      'Built a multi-platform ecosystem with Next.js web, mobile, and desktop clients featuring content filtering, monitoring dashboards, and educational tools for families.',
-    results:
-      'Families gain comprehensive digital safety across devices, with tools that protect, educate, and empower informed online habits.',
+    ...ainaSalsabilaCaseStudy,
   },
   chronomanager: {
     subtitle: 'Visual Task Management Application',
