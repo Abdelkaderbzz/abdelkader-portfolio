@@ -423,7 +423,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       'Users communicate and organize events from a single app, reducing context switching and keeping teams aligned.',
   },
   arabizzi: {
-    subtitle: 'Arabizi to Arabic Chrome Extension',
+    subtitle: 'Arabizi to Arabic Chrome Extension & Web App',
     role: 'Frontend Developer',
     year: '2024',
     banner: '/images/arabizzi-banner.png',
@@ -440,16 +440,16 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       },
     ],
     overview:
-      'Type Arabizi is a free Chrome extension that instantly converts Arabizi — Arabic written with Latin characters and numbers — into proper Arabic script as you type.',
+      'Arabizzi is a free Chrome extension and Next.js web app that instantly converts Arabizi (Arabic written with Latin characters and numbers) into proper Arabic script, Modern Standard Arabic (Fusha), English, or French as you type. It\'s powered by Google Gemini and works with your own free API key, so nothing is stored on a server.',
     challenge:
-      'Arabizi is widely used in messaging and social media, but switching between Latin and Arabic keyboards breaks flow and slows communication for bilingual users.',
+      'Arabizi (e.g. "3aslema, chneya 7alek?") is everywhere in messaging and social media, but there\'s no clean way to turn it into real Arabic. Bilingual users constantly switch between Latin and Arabic keyboards, which breaks their flow and slows down communication.',
     solution:
-      'Built a lightweight Chrome extension with real-time transliteration — type Arabizi in any text field and get Arabic output instantly, with zero configuration.',
+      'I built a lightweight Manifest V3 Chrome extension and a companion web app that share the same conversion engine. Users type Arabizi in any text field and get accurate Arabic output instantly, with Fusha and Tunisian dialect modes, one-click copy, conversion history, bookmarks, and a bilingual English/Arabic RTL interface. Zero configuration beyond a free Gemini key.',
     results:
-      'Users can communicate naturally in Arabizi while producing clean Arabic text, removing friction from everyday typing across the web.',
+      'Users can now communicate naturally in Arabizi while producing clean, correct Arabic text, removing friction from everyday typing across the web. The project is fully open-source, published on the Chrome Web Store, and live at arabizzi.com.',
   },
   'type-arabizi': {
-    subtitle: 'Arabizi to Arabic Chrome Extension',
+    subtitle: 'Arabizi to Arabic Chrome Extension & Web App',
     role: 'Frontend Developer',
     year: '2024',
     banner: '/images/arabizzi-banner.png',
@@ -466,13 +466,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       },
     ],
     overview:
-      'Type Arabizi is a free Chrome extension that instantly converts Arabizi — Arabic written with Latin characters and numbers — into proper Arabic script as you type.',
+      'Arabizzi is a free Chrome extension and Next.js web app that instantly converts Arabizi (Arabic written with Latin characters and numbers) into proper Arabic script, Modern Standard Arabic (Fusha), English, or French as you type. It\'s powered by Google Gemini and works with your own free API key, so nothing is stored on a server.',
     challenge:
-      'Arabizi is widely used in messaging and social media, but switching between Latin and Arabic keyboards breaks flow and slows communication for bilingual users.',
+      'Arabizi (e.g. "3aslema, chneya 7alek?") is everywhere in messaging and social media, but there\'s no clean way to turn it into real Arabic. Bilingual users constantly switch between Latin and Arabic keyboards, which breaks their flow and slows down communication.',
     solution:
-      'Built a lightweight Chrome extension with real-time transliteration — type Arabizi in any text field and get Arabic output instantly, with zero configuration.',
+      'I built a lightweight Manifest V3 Chrome extension and a companion web app that share the same conversion engine. Users type Arabizi in any text field and get accurate Arabic output instantly, with Fusha and Tunisian dialect modes, one-click copy, conversion history, bookmarks, and a bilingual English/Arabic RTL interface. Zero configuration beyond a free Gemini key.',
     results:
-      'Users can communicate naturally in Arabizi while producing clean Arabic text, removing friction from everyday typing across the web.',
+      'Users can now communicate naturally in Arabizi while producing clean, correct Arabic text, removing friction from everyday typing across the web. The project is fully open-source, published on the Chrome Web Store, and live at arabizzi.com.',
   },
 };
 
