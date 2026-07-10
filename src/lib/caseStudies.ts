@@ -199,7 +199,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       'Users gained a single, focused tool to monitor and improve their Ramadan practices, replacing scattered tracking with one clear system. With daily progress feedback, milestone badges, and reflection tools, the app helps users stay consistent, recognize their effort, and move through Ramadan with greater awareness and motivation.',
   },
   'custom-service-platform': {
-    subtitle: 'Scalable Customer Support Platform',
+    subtitle: 'Customer Service Platform',
     role: 'Full-Stack Developer',
     year: '2024',
     banner: '/images/takipopups-banner.png',
@@ -250,7 +250,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       'Support teams can engage customers in real time while delivering contextual guidance and targeted content, reducing friction and improving resolution rates.',
   },
   takipopups: {
-    subtitle: 'Scalable Customer Support Platform',
+    subtitle: 'Customer Service Platform',
     role: 'Full-Stack Developer',
     year: '2024',
     banner: '/images/takipopups-banner.png',
@@ -388,13 +388,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       },
     ],
     overview:
-      'An intuitive task management app featuring folders, lists, drag-and-drop, and three powerful views: Kanban, Priority, and List — designed to keep you organized and in control.',
+      'ChronoManager is a browser-based productivity workspace that unifies task management and deep focus in one place. Organize work into folders and lists, switch fluidly between Kanban, Priority, and Checklist views, and stay in flow with a built-in Pomodoro timer and plant-growth gamification, all running locally with no account required.',
     challenge:
-      'Existing task managers force users into a single view paradigm, making it hard to switch between high-level planning and detailed execution.',
+      'Most task managers lock users into a single view and treat focus as an afterthought. Planning, executing, and actually concentrating live in separate tools, forcing constant context-switching and leaving productivity fragmented across apps.',
     solution:
-      'Built a flexible task manager with Kanban, Priority, and List views, drag-and-drop organization, and folder hierarchy — letting users work the way they think.',
+      'I built a flexible, self-contained productivity app that adapts to how people work. Three interchangeable views (Kanban, Priority, Checklist) with drag-and-drop and a folder hierarchy cover everything from sprint planning to daily execution. Role-based templates like Developer, Marketer, Student, and Designer get users productive in seconds, while an integrated Pomodoro timer and plant gamification turn focus sessions into visible progress. Everything persists locally with export/import backups and full dark-mode support.',
     results:
-      'Users stay organized across projects with views that adapt to their workflow, from sprint planning to daily task execution.',
+      'Users stay organized and focused without juggling multiple tools. Views adapt to each stage of the workflow, ready-made templates remove setup friction, and the focus timer keeps momentum, making ChronoManager a single home for both planning work and getting it done.',
   },
   onq: {
     subtitle: 'Real-Time Chat & Event Management',
