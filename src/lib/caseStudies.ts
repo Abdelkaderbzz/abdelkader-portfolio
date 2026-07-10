@@ -422,14 +422,7 @@ export const caseStudies: Record<string, CaseStudyContent> = {
         role: 'Full-Stack Developer',
       },
     ],
-    overview:
-      'onQ is an innovative chat application that enables real-time messaging, group creation, and event management, streamlining communication and organization for users.',
-    challenge:
-      'Teams needed messaging and event coordination in one place instead of switching between chat apps and calendar tools.',
-    solution:
-      'Developed a real-time chat platform with group management, event scheduling, and integrated organization features — keeping communication and planning in sync.',
-    results:
-      'Users communicate and organize events from a single app, reducing context switching and keeping teams aligned.',
+    ...onqCaseStudy,
   },
   arabizzi: {
     subtitle: 'Arabizi to Arabic Chrome Extension & Web App',
