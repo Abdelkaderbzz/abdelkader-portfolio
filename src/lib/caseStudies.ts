@@ -241,13 +241,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       },
     ],
     overview:
-      'Scalable customer support service with real-time messaging, personalized product tours, dynamic banners, custom popups, and targeted content. Supports team collaboration, permission management, and automation.',
+      'A scalable customer service platform built with React, TypeScript, and SCSS that unifies real-time chat, custom popups, dynamic banners, product tours, and targeted in-app content in one admin surface. Teams can collaborate across roles, segment and group users, schedule messages, and automate engagement — powering 50K+ monthly active users within the first quarter of launch.',
     challenge:
-      'Businesses needed a unified support platform that goes beyond chat — combining real-time messaging with in-app guidance, targeted content, and team collaboration at scale.',
+      'Businesses needed more than a chat widget. Support, product, and marketing teams were juggling separate tools for messaging, onboarding, popups, banners, and user targeting — with no shared way to collaborate, permission workflows, or deliver contextual guidance at scale without slowing the product down.',
     solution:
-      'Built a modular support platform with real-time messaging, customizable popups and banners, product tours, role-based permissions, and team workflows — all from a single admin surface.',
+      'We built a modular customer service platform around real-time messaging, scheduled campaigns, custom popups, in-app banners, and guided product tours — with user targeting, grouping, and role-based permissions from a single dashboard. I revamped 15+ core UI components in React and TypeScript, led cross-functional collaboration between development and product, and implemented IndexedDB caching to cut endpoint requests by 30%. We also shipped a real-time notification system, a push alert service using Service Workers and Firebase, and a monolithic modular architecture with a detailed SDK installation guide to improve developer onboarding and long-term maintainability.',
     results:
-      'Support teams can engage customers in real time while delivering contextual guidance and targeted content, reducing friction and improving resolution rates.',
+      'The platform reached 50K+ monthly active users in its first quarter while improving product quality across the board: user satisfaction scores rose 25% after the UI overhaul, design usability improved 40% from user feedback, and app speed increased 25% through smarter caching. Real-time notifications boosted interaction rates by 25%, the in-app banner system lifted engagement by 40% and retention by 15%, push alerts reached 10K+ active users, and custom product tours cut new-user onboarding time by 25%. SDK setup time dropped 30%, and the modular architecture improved scalability by 30% while reducing maintenance effort by 25%.',
   },
   takipopups: {
     subtitle: 'Customer Service Platform',
@@ -292,13 +292,13 @@ export const caseStudies: Record<string, CaseStudyContent> = {
       },
     ],
     overview:
-      'Scalable customer support service with real-time messaging, personalized product tours, dynamic banners, custom popups, and targeted content. Supports team collaboration, permission management, and automation.',
+      'A scalable customer service platform built with React, TypeScript, and SCSS that unifies real-time chat, custom popups, dynamic banners, product tours, and targeted in-app content in one admin surface. Teams can collaborate across roles, segment and group users, schedule messages, and automate engagement — powering 50K+ monthly active users within the first quarter of launch.',
     challenge:
-      'Businesses needed a unified support platform that goes beyond chat — combining real-time messaging with in-app guidance, targeted content, and team collaboration at scale.',
+      'Businesses needed more than a chat widget. Support, product, and marketing teams were juggling separate tools for messaging, onboarding, popups, banners, and user targeting — with no shared way to collaborate, permission workflows, or deliver contextual guidance at scale without slowing the product down.',
     solution:
-      'Built a modular support platform with real-time messaging, customizable popups and banners, product tours, role-based permissions, and team workflows — all from a single admin surface.',
+      'We built a modular customer service platform around real-time messaging, scheduled campaigns, custom popups, in-app banners, and guided product tours — with user targeting, grouping, and role-based permissions from a single dashboard. I revamped 15+ core UI components in React and TypeScript, led cross-functional collaboration between development and product, and implemented IndexedDB caching to cut endpoint requests by 30%. We also shipped a real-time notification system, a push alert service using Service Workers and Firebase, and a monolithic modular architecture with a detailed SDK installation guide to improve developer onboarding and long-term maintainability.',
     results:
-      'Support teams can engage customers in real time while delivering contextual guidance and targeted content, reducing friction and improving resolution rates.',
+      'The platform reached 50K+ monthly active users in its first quarter while improving product quality across the board: user satisfaction scores rose 25% after the UI overhaul, design usability improved 40% from user feedback, and app speed increased 25% through smarter caching. Real-time notifications boosted interaction rates by 25%, the in-app banner system lifted engagement by 40% and retention by 15%, push alerts reached 10K+ active users, and custom product tours cut new-user onboarding time by 25%. SDK setup time dropped 30%, and the modular architecture improved scalability by 30% while reducing maintenance effort by 25%.',
   },
   gorec: {
     subtitle: 'Browser-Based Screen Recording',
