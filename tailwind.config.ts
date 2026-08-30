@@ -75,9 +75,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Geist', 'system-ui', 'sans-serif'],
-        display: ['Fraunces', 'Georgia', 'serif'],
-        mono: ['"Geist Mono"', 'ui-monospace', 'monospace'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       borderRadius: {
         lg: 'var(--radius)',

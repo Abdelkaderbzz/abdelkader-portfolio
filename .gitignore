@@ -10,7 +10,10 @@ package-lock.json
 node_modules
 dist
 dist-ssr
+.next
+out
 *.local
+.env*.local
 
 # Editor directories and files
 .vscode/*
@@ -23,3 +26,4 @@ dist-ssr
 *.sln
 *.sw?
 config.bat
+.pnpm-store
