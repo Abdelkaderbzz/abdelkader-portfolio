@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import SectionHeader from '@/components/SectionHeader';
 
 const highlights = [
@@ -73,13 +74,15 @@ const Teaching = () => {
               {photos.map((photo) => (
                 <figure
                   key={photo.src}
-                  className="break-inside-avoid overflow-hidden rounded-xl border border-border bg-muted"
+                  className="relative break-inside-avoid overflow-hidden rounded-xl border border-border bg-muted"
                 >
-                  <img
+                  <Image
                     src={photo.src}
                     alt={photo.alt}
-                    loading="lazy"
-                    className="w-full transition-transform duration-500 hover:scale-[1.03]"
+                    width={640}
+                    height={800}
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="h-auto w-full transition-transform duration-500 hover:scale-[1.03]"
                   />
                 </figure>
               ))}

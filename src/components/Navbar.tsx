@@ -1,7 +1,11 @@
+'use client';
+
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useSite } from '@/components/site-context';
 import CVPreview from './CVPreview';
 
 const navItems = [
@@ -18,8 +22,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-  const location = useLocation();
-  const isHome = location.pathname === '/';
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const { cvUrl } = useSite();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -29,7 +34,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
     <>
@@ -43,7 +48,7 @@ const Navbar = () => {
       >
         <div className="container-tight flex h-16 items-center justify-between">
           <Link
-            to="/"
+            href="/"
             className="font-display text-lg tracking-tight leading-none"
           >
             Abdelkader
@@ -54,7 +59,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <Link
                 key={item.name}
-                to={item.href}
+                href={item.href}
                 className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.name}
@@ -67,7 +72,7 @@ const Navbar = () => {
               CV
             </button>
             <Link
-              to="/#contact"
+              href="/#contact"
               className="group inline-flex items-center gap-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-brand hover:text-brand-foreground px-4 py-2 rounded-full transition-all"
             >
               Let's talk
@@ -93,7 +98,7 @@ const Navbar = () => {
               {navItems.map((item, i) => (
                 <Link
                   key={item.name}
-                  to={item.href}
+                  href={item.href}
                   className="flex items-center justify-between py-3 border-b border-[hsl(var(--paper-line))] font-display text-2xl"
                 >
                   {item.name}
@@ -115,7 +120,7 @@ const Navbar = () => {
                 </span>
               </button>
               <Link
-                to="/#contact"
+                href="/#contact"
                 className="btn-primary mt-5 w-full"
               >
                 Let's talk
@@ -125,7 +130,11 @@ const Navbar = () => {
         )}
       </header>
 
-      <CVPreview isOpen={isPreviewOpen} onClose={() => setIsPreviewOpen(false)} />
+      <CVPreview
+        isOpen={isPreviewOpen}
+        onClose={() => setIsPreviewOpen(false)}
+        cvUrl={cvUrl}
+      />
     </>
   );
 };

@@ -1,16 +1,23 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import { useState } from 'react';
 import { Send, Github, Linkedin, Twitter, Loader2, ArrowUpRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { sendEmail, type EmailData } from '@/services/emailService';
-import { contentfulClient } from '@/lib/contentfulClient';
 import SectionHeader from '@/components/SectionHeader';
+import { PersonalInfo, Social } from '@/types/content';
 
-const Contact = ({ personalDetails }) => {
+const Contact = ({
+  personalDetails,
+  socials,
+}: {
+  personalDetails: PersonalInfo | null;
+  socials: Social[];
+}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [socials, setSocials] = useState([]);
   const [errors, setErrors] = useState<{
     name?: string;
     email?: string;
@@ -66,20 +73,6 @@ const Contact = ({ personalDetails }) => {
 
     setLoading(false);
   };
-
-  useEffect(() => {
-    contentfulClient
-      .getEntries({ content_type: 'socials' })
-      .then((response) => {
-        setSocials(
-          response.items.map((item) => ({
-            id: item.sys.id,
-            ...(item.fields as Record<string, unknown>),
-          }))
-        );
-      })
-      .catch(console.error);
-  }, []);
 
   const inputClass = (hasError: boolean) =>
     `w-full bg-transparent border-b py-3 text-foreground placeholder:text-muted-foreground/60 focus:outline-none transition-colors ${

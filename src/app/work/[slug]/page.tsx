@@ -1,16 +1,22 @@
-import { useEffect } from 'react';
-import { Link, useParams, Navigate } from 'react-router-dom';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import MainLayout from '@/layouts/MainLayout';
+import { assetUrl, getDisplayTitle } from '@/lib/format';
 import {
-  useProjects,
-  getProjectBySlug,
+  findProject,
   getAdjacentProjects,
-} from '@/hooks/useProjects';
+  getAllWorkSlugs,
+  getProjects,
+} from '@/lib/cms';
 import {
   getCaseStudy,
   generateCaseStudyFromDescription,
 } from '@/lib/caseStudies';
+import { caseStudyJsonLd } from '@/lib/seo';
+import { SITE_NAME, SITE_URL } from '@/lib/site';
 
 const sections = [
   { key: 'overview', label: '01', title: 'Overview' },
@@ -19,50 +25,110 @@ const sections = [
   { key: 'results', label: '04', title: 'The Results' },
 ] as const;
 
-const getDisplayTitle = (slug: string, title: string) =>
-  slug === 'thekey' ? 'The Key' : title;
+export const revalidate = 3600;
 
-const CaseStudy = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const { projects, loading } = useProjects();
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
-  const project = slug ? getProjectBySlug(projects, slug) : undefined;
-  const { prev, next } = slug
-    ? getAdjacentProjects(projects, slug)
-    : { prev: null, next: null };
+export async function generateStaticParams() {
+  const slugs = await getAllWorkSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <MainLayout>
-        <div className="min-h-[70vh] flex items-center justify-center">
-          <div className="h-7 w-7 border-2 border-border border-t-brand rounded-full animate-spin" />
-        </div>
-      </MainLayout>
-    );
-  }
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const projects = await getProjects();
+  const project = findProject(projects, slug);
 
   if (!project) {
-    return <Navigate to="/" replace />;
+    return { title: 'Project not found' };
   }
 
   const caseStudy =
     getCaseStudy(project.slug) ??
     generateCaseStudyFromDescription(project.title, project.description);
-
-  const heroImage = caseStudy.banner ?? project.images[0]?.fields?.file?.url;
   const displayTitle = getDisplayTitle(project.slug, project.title);
+  const description = caseStudy.overview.slice(0, 160);
+  const image =
+    caseStudy.banner ??
+    assetUrl(project.images[0]?.fields?.file?.url);
+  const absoluteImage = image
+    ? image.startsWith('http')
+      ? image
+      : `${SITE_URL}${image}`
+    : undefined;
+
+  return {
+    title: displayTitle,
+    description,
+    alternates: {
+      canonical: `${SITE_URL}/work/${project.slug}`,
+    },
+    openGraph: {
+      title: `${displayTitle} | ${SITE_NAME}`,
+      description,
+      url: `${SITE_URL}/work/${project.slug}`,
+      type: 'article',
+      images: absoluteImage
+        ? [{ url: absoluteImage, alt: displayTitle }]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${displayTitle} | ${SITE_NAME}`,
+      description,
+      images: absoluteImage ? [absoluteImage] : undefined,
+    },
+  };
+}
+
+export default async function CaseStudyPage({ params }: PageProps) {
+  const { slug } = await params;
+  const projects = await getProjects();
+  const project = findProject(projects, slug);
+
+  if (!project) {
+    notFound();
+  }
+
+  const { prev, next } = getAdjacentProjects(projects, project.slug);
+  const caseStudy =
+    getCaseStudy(project.slug) ??
+    generateCaseStudyFromDescription(project.title, project.description);
+
+  const heroImage =
+    caseStudy.banner ?? assetUrl(project.images[0]?.fields?.file?.url);
+  const displayTitle = getDisplayTitle(project.slug, project.title);
+  const absoluteHero = heroImage
+    ? heroImage.startsWith('http')
+      ? heroImage
+      : `${SITE_URL}${heroImage}`
+    : undefined;
+  const jsonLd = caseStudyJsonLd({
+    title: displayTitle,
+    description: caseStudy.overview.slice(0, 200),
+    slug: project.slug,
+    image: absoluteHero,
+    datePublished: caseStudy.year ? `${caseStudy.year}-01-01` : undefined,
+    keywords: project.tags,
+  });
 
   return (
     <MainLayout>
-      {/* Editorial title block */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      <article>
       <section className="pt-32 pb-14 border-b border-[hsl(var(--paper-line))]">
         <div className="container-tight">
           <Link
-            to="/#projects"
+            href="/#projects"
             className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-brand transition-colors mb-12"
           >
             <ArrowLeft
@@ -141,11 +207,13 @@ const CaseStudy = () => {
                     className="group relative -ml-3 first:ml-0 transition-[z-index] duration-200 hover:z-50"
                     style={{ zIndex: caseStudy.contributors!.length - index }}
                   >
-                    <div className="h-11 w-11 overflow-hidden rounded-full border-2 border-background bg-muted ring-1 ring-border transition-transform duration-200 group-hover:scale-110 group-hover:z-50">
-                      <img
+                    <div className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-background bg-muted ring-1 ring-border transition-transform duration-200 group-hover:scale-110 group-hover:z-50">
+                      <Image
                         src={contributor.image}
                         alt={contributor.name}
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="44px"
+                        className="object-cover"
                       />
                     </div>
                     <div
@@ -170,22 +238,23 @@ const CaseStudy = () => {
         </div>
       </section>
 
-      {/* Lead image */}
       {heroImage && (
         <section className="border-b border-[hsl(var(--paper-line))]">
           <div className="container-tight py-14">
-            <div className="overflow-hidden rounded-xl border border-border bg-muted">
-              <img
+            <div className="relative aspect-[16/7] overflow-hidden rounded-xl border border-border bg-muted">
+              <Image
                 src={heroImage}
-                alt={displayTitle}
-                className="w-full object-cover"
+                alt={`${displayTitle} case study banner`}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1152px"
+                className="object-cover"
               />
             </div>
           </div>
         </section>
       )}
 
-      {/* Narrative */}
       <section className="section-padding">
         <div className="container-tight grid md:grid-cols-[1fr_2fr] gap-8 md:gap-16">
           <div className="md:sticky md:top-24 h-fit">
@@ -230,7 +299,6 @@ const CaseStudy = () => {
         </div>
       </section>
 
-      {/* Gallery */}
       {project.images.length > 1 && (
         <section className="pb-24 border-t border-[hsl(var(--paper-line))] pt-14">
           <div className="container-tight">
@@ -244,12 +312,13 @@ const CaseStudy = () => {
                   `${displayTitle} — screenshot ${idx + 1}`;
                 return (
                   <figure key={idx} className="space-y-3">
-                    <div className="overflow-hidden rounded-xl border border-border bg-muted">
-                      <img
-                        src={img.fields.file.url}
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border bg-muted">
+                      <Image
+                        src={assetUrl(img.fields.file.url) ?? ''}
                         alt={caption}
-                        className="w-full"
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 1152px"
+                        className="object-cover object-top"
                       />
                     </div>
                     <figcaption className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
@@ -263,12 +332,11 @@ const CaseStudy = () => {
         </section>
       )}
 
-      {/* Prev / Next */}
       <section className="border-t border-[hsl(var(--paper-line))] section-muted">
         <div className="container-tight grid grid-cols-1 md:grid-cols-2">
           {prev ? (
             <Link
-              to={`/work/${prev.slug}`}
+              href={`/work/${prev.slug}`}
               className="group py-12 md:pr-8 md:border-r border-[hsl(var(--paper-line))]"
             >
               <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 mb-3">
@@ -284,7 +352,7 @@ const CaseStudy = () => {
           )}
           {next ? (
             <Link
-              to={`/work/${next.slug}`}
+              href={`/work/${next.slug}`}
               className="group py-12 md:pl-8 md:text-right"
             >
               <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 mb-3 md:justify-end">
@@ -300,8 +368,7 @@ const CaseStudy = () => {
           )}
         </div>
       </section>
+      </article>
     </MainLayout>
   );
-};
-
-export default CaseStudy;
+}

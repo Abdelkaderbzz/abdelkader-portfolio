@@ -12,7 +12,7 @@ const Footer = () => {
             <span className="text-brand">.</span>
           </p>
           <a
-            href="#home"
+            href="/#home"
             className="group shrink-0 flex h-12 w-12 items-center justify-center rounded-full border border-border hover:bg-brand hover:text-brand-foreground hover:border-brand transition-all"
             aria-label="Back to top"
           >

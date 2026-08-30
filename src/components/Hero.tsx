@@ -1,12 +1,16 @@
 import { ArrowDownRight } from 'lucide-react';
+import { PersonalInfo } from '@/types/content';
 
-const Hero = ({ personalDetails }) => {
+const Hero = ({
+  personalDetails,
+}: {
+  personalDetails: PersonalInfo | null;
+}) => {
   return (
     <section
       id="home"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* Atmospheric background */}
       <div
         className="absolute inset-0 -z-10"
         style={{
@@ -20,7 +24,6 @@ const Hero = ({ personalDetails }) => {
       />
 
       <div className="container-tight w-full pt-32 pb-20">
-        {/* Meta row */}
         <div
           className="reveal flex items-center justify-between flex-wrap gap-4 mb-14 pb-6 border-b border-[hsl(var(--paper-line))]"
           style={{ animationDelay: '0.05s' }}
@@ -37,7 +40,6 @@ const Hero = ({ personalDetails }) => {
           </span>
         </div>
 
-        {/* Headline */}
         <h1 className="display-title text-[13vw] leading-[0.95] sm:text-7xl md:text-8xl lg:text-[7.5rem]">
           <span className="reveal block" style={{ animationDelay: '0.12s' }}>
             Building
@@ -53,7 +55,6 @@ const Hero = ({ personalDetails }) => {
           </span>
         </h1>
 
-        {/* Sub row */}
         <div className="mt-12 grid md:grid-cols-[1fr_auto] gap-10 items-end">
           <p
             className="reveal text-body max-w-lg"
@@ -81,7 +82,6 @@ const Hero = ({ personalDetails }) => {
         </div>
       </div>
 
-      {/* Bottom marquee-ish name line */}
       <div className="container-tight w-full pb-8">
         <div
           className="reveal flex items-center justify-between eyebrow border-t border-[hsl(var(--paper-line))] pt-5"

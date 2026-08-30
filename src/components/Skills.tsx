@@ -1,30 +1,7 @@
-import { useEffect, useState } from 'react';
-import { contentfulClient } from '@/lib/contentfulClient';
 import SectionHeader from '@/components/SectionHeader';
+import { SkillCategory } from '@/types/content';
 
-interface SkillCategory {
-  id: string;
-  name: string;
-  skills: string[];
-}
-
-const Skills = () => {
-  const [skillsItems, setSkills] = useState<SkillCategory[]>([]);
-
-  useEffect(() => {
-    contentfulClient
-      .getEntries({ content_type: 'skills' })
-      .then((response) => {
-        setSkills(
-          response.items.map((item) => ({
-            id: item.sys.id,
-            ...(item.fields as SkillCategory),
-          }))
-        );
-      })
-      .catch(console.error);
-  }, []);
-
+const Skills = ({ skills }: { skills: SkillCategory[] }) => {
   return (
     <section
       id="skills"
@@ -39,7 +16,7 @@ const Skills = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
-          {skillsItems.map((category, i) => (
+          {skills.map((category, i) => (
             <div
               key={category.id}
               className="grid grid-cols-[auto_1fr] gap-6 py-8 border-t border-[hsl(var(--paper-line))]"

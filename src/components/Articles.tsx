@@ -1,48 +1,8 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { contentfulClient } from '@/lib/contentfulClient';
 import SectionHeader from '@/components/SectionHeader';
+import { Article } from '@/types/content';
 
-interface ContentfulAsset {
-  fields: {
-    file: {
-      url: string;
-    };
-  };
-}
-
-interface Article {
-  id: string;
-  title: string;
-  description: string;
-  link: string;
-  date: string;
-  platform: 'medium' | 'devto';
-  image: ContentfulAsset;
-  readTime: string;
-  authorName: string;
-  authorImage: ContentfulAsset;
-}
-
-const Articles = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-
-  useEffect(() => {
-    contentfulClient
-      .getEntries({ content_type: 'article' })
-      .then((response) => {
-        setArticles(
-          response.items.map((item) => ({
-            id: item.sys.id,
-            ...(item.fields as unknown as Article),
-          }))
-        );
-      })
-      .catch(console.error);
-  }, []);
-
+const Articles = ({ articles }: { articles: Article[] }) => {
   return (
     <section
       id="articles"
@@ -67,7 +27,9 @@ const Articles = () => {
             >
               <div className="min-w-0">
                 <div className="flex items-center gap-3 mb-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                  <span>{article.platform === 'medium' ? 'Medium' : 'Dev.to'}</span>
+                  <span>
+                    {article.platform === 'medium' ? 'Medium' : 'Dev.to'}
+                  </span>
                   <span className="text-muted-foreground/40">·</span>
                   <span>{article.date}</span>
                   <span className="text-muted-foreground/40">·</span>

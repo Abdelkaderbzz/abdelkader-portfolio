@@ -1,7 +1,17 @@
+import 'server-only';
+
 import * as contentful from 'contentful';
 
+function requiredEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+  return value;
+}
+
 export const contentfulClient = contentful.createClient({
-  space: '3k73j1bqwg64',
-  environment: 'master', // defaults to 'master' if not set
-  accessToken: 'EyZ_Ynxs4P1R-hj1jM_WR63P8b9YR-coGhyfRcSRF7Q',
+  space: requiredEnv('CONTENTFUL_SPACE_ID'),
+  environment: process.env.CONTENTFUL_ENVIRONMENT || 'master',
+  accessToken: requiredEnv('CONTENTFUL_ACCESS_TOKEN'),
 });
