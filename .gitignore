@@ -27,3 +27,6 @@ out
 *.sw?
 config.bat
 .pnpm-store
+
+# Local Netlify folder
+.netlify
