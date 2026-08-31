@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Fraunces, Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { Providers } from './providers';
-import { getCVUrl } from '@/lib/cms';
 import { personJsonLd, websiteJsonLd } from '@/lib/seo';
 import {
   SITE_DESCRIPTION,
@@ -113,7 +112,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cvUrl = await getCVUrl();
+  // Keep the root layout free of CMS calls so /_not-found can build without Contentful.
+  const cvUrl = '/Abdelkader-bouzomita_CV.pdf';
   const umamiId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
   const feeduserToken = process.env.NEXT_PUBLIC_FEEDUSER_TOKEN;
   const structuredData = [personJsonLd(), websiteJsonLd()];

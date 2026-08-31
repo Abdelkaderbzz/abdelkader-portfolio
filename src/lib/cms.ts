@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { contentfulClient } from '@/lib/contentfulClient';
+import { getContentfulClient } from '@/lib/contentfulClient';
 import { slugify } from '@/lib/slugify';
 import { caseStudies, getCaseStudy } from '@/lib/caseStudies';
 import { assetUrl } from '@/lib/format';
@@ -47,7 +47,7 @@ function normalizeProject(item: {
 }
 
 export async function getProjects(): Promise<Project[]> {
-  const response = await contentfulClient.getEntries({
+  const response = await getContentfulClient().getEntries({
     content_type: 'project',
   });
   const items = response.items.map((item) =>
@@ -102,7 +102,7 @@ export function getAdjacentProjects(
 }
 
 export async function getPersonalInfo(): Promise<PersonalInfo | null> {
-  const response = await contentfulClient.getEntries({
+  const response = await getContentfulClient().getEntries({
     content_type: 'personalInfo',
   });
   return (response.items?.[0]?.fields as PersonalInfo) ?? null;
@@ -130,7 +130,7 @@ function companyKey(company: string) {
 }
 
 export async function getExperience(): Promise<Experience[]> {
-  const response = await contentfulClient.getEntries({
+  const response = await getContentfulClient().getEntries({
     content_type: 'experience',
   });
   return response.items
@@ -156,7 +156,7 @@ export async function getExperience(): Promise<Experience[]> {
 }
 
 export async function getEducation(): Promise<Education[]> {
-  const response = await contentfulClient.getEntries({
+  const response = await getContentfulClient().getEntries({
     content_type: 'education',
   });
   return response.items.map((item) => {
@@ -172,7 +172,7 @@ export async function getEducation(): Promise<Education[]> {
 }
 
 export async function getArticles(): Promise<Article[]> {
-  const response = await contentfulClient.getEntries({
+  const response = await getContentfulClient().getEntries({
     content_type: 'article',
   });
   return response.items.map((item) => {
@@ -193,7 +193,7 @@ export async function getArticles(): Promise<Article[]> {
 }
 
 export async function getSkills(): Promise<SkillCategory[]> {
-  const response = await contentfulClient.getEntries({
+  const response = await getContentfulClient().getEntries({
     content_type: 'skills',
   });
   return response.items.map((item) => {
@@ -207,7 +207,7 @@ export async function getSkills(): Promise<SkillCategory[]> {
 }
 
 export async function getSocials(): Promise<Social[]> {
-  const response = await contentfulClient.getEntries({
+  const response = await getContentfulClient().getEntries({
     content_type: 'socials',
   });
   return response.items.map((item) => {
@@ -222,7 +222,7 @@ export async function getSocials(): Promise<Social[]> {
 
 export async function getCVUrl(): Promise<string> {
   try {
-    const response = await contentfulClient.getEntries({
+    const response = await getContentfulClient().getEntries({
       content_type: 'cv',
     });
     const url = maybeAssetUrl(

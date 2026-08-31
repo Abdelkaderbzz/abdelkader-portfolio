@@ -172,6 +172,9 @@ devDependencies:
   '@eslint/js':
     specifier: ^9.9.0
     version: 9.39.2
+  '@netlify/plugin-nextjs':
+    specifier: ^5.15.13
+    version: 5.15.13
   '@tailwindcss/typography':
     specifier: ^0.5.15
     version: 0.5.19(tailwindcss@3.4.19)
@@ -675,6 +678,11 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  /@netlify/plugin-nextjs@5.15.13:
+    resolution: {integrity: sha512-gBmWtgG13ZW4ytNMCvacfwZemtdtV/Ekc+6RBYvI5fndjmDvKxgFHylsw7oli+PHMGAtNqaJrN8QccGnDReu6A==}
+    engines: {node: '>=18.0.0'}
+    dev: true
 
   /@next/env@15.5.24:
     resolution: {integrity: sha512-mBDF7T0XKZjs9SpUAl0buizVO+O02ULjOvWX8o/AZo/5AGw/UAS1Zzcylmd4pqbftzmKQi+L/nB4jgBYKEAl5Q==}

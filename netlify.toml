@@ -1,0 +1,11 @@
+[build]
+  command = "bun run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Next.js Runtime — do not set publish to "dist" (that was Vite).
+# Clear Publish directory in Netlify UI if it still says "dist".
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
