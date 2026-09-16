@@ -101,6 +101,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   const heroImage =
     caseStudy.banner ?? assetUrl(project.images[0]?.fields?.file?.url);
+  const heroIsBanner = Boolean(caseStudy.banner);
   const displayTitle = getDisplayTitle(project.slug, project.title);
   const absoluteHero = heroImage
     ? heroImage.startsWith('http')
@@ -241,14 +242,18 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {heroImage && (
         <section className="border-b border-[hsl(var(--paper-line))]">
           <div className="container-tight py-14">
-            <div className="relative aspect-[16/7] overflow-hidden rounded-xl border border-border bg-muted">
+            <div
+              className={`relative overflow-hidden rounded-xl border border-border bg-muted ${
+                heroIsBanner ? 'aspect-[869/217]' : 'aspect-[16/7]'
+              }`}
+            >
               <Image
                 src={heroImage}
                 alt={`${displayTitle} case study banner`}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 1152px"
-                className="object-cover"
+                className={heroIsBanner ? 'object-contain' : 'object-cover'}
               />
             </div>
           </div>
@@ -310,15 +315,17 @@ export default async function CaseStudyPage({ params }: PageProps) {
                 const caption =
                   caseStudy.imageCaptions?.[idx] ??
                   `${displayTitle} — screenshot ${idx + 1}`;
+                const dimensions = img.fields.file.details?.image;
                 return (
                   <figure key={idx} className="space-y-3">
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border bg-muted">
+                    <div className="overflow-hidden rounded-xl border border-border bg-muted">
                       <Image
                         src={assetUrl(img.fields.file.url) ?? ''}
                         alt={caption}
-                        fill
+                        width={dimensions?.width ?? 1600}
+                        height={dimensions?.height ?? 1000}
                         sizes="(max-width: 1024px) 100vw, 1152px"
-                        className="object-cover object-top"
+                        className="h-auto w-full"
                       />
                     </div>
                     <figcaption className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
