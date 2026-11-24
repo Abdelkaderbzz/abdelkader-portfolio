@@ -68,6 +68,27 @@ const onqCaseStudy = {
 };
 
 export const caseStudies: Record<string, CaseStudyContent> = {
+  face2toon: {
+    subtitle: 'AI-Personalised Children’s Storybooks',
+    role: 'Full-Stack Developer',
+    year: '2026',
+    banner: '/images/face2toon-cover.png',
+    overview:
+      'Face2Toon turns a few photos of a child into an illustrated character, then writes a personalised story around them, with their name, their face, and an adventure they choose. Families preview the cover and first chapter for free, then get a digital book straight away and a printed 21.6 × 21.6 cm, 24-page hardcopy with four colouring pages at the end.',
+    challenge:
+      'Personalised books usually stop at swapping a name into a fixed template. Parents wanted a book where the child genuinely looks like the hero, across every page, without a design tool, an illustrator, or hours of back-and-forth, and they needed to trust what happens to their child’s photos along the way.',
+    solution:
+      'We built a guided creation flow: upload 3–5 clear front-facing photos, pick an adventure, one of three illustration styles and one of five languages (French, English, Spanish, Italian, Arabic), and add the child’s name. Google’s generative AI produces a consistent character and illustrations, with a free preview of the cover and first chapter before checkout. Payments run through Stripe (card, Apple Pay, Google Pay, Klarna), gift cards let relatives offer a book without the photos, and seasonal editions like the Christmas book ship on a print deadline. Photos are stored in France and permanently deleted 24 hours after the book is created.',
+    results:
+      'Face2Toon makes a one-of-a-kind keepsake accessible in a few minutes: children see themselves as the hero of their own story, parents see the result before paying, and the digital version is ready immediately while the printed book is on its way.',
+    imageCaptions: [
+      'Face2Toon — homepage, Christmas edition',
+      'Face2Toon — story library with age, style and language filters',
+      'Face2Toon — personalised book product page',
+      'Face2Toon — gift card checkout',
+      'Face2Toon — example generated book cover',
+    ],
+  },
   thekey: {
     subtitle: 'AI-Powered Higher Education Platform for Saudi Arabia',
     role: 'Lead Frontend Engineer',

@@ -3,6 +3,24 @@ import SectionHeader from '@/components/SectionHeader';
 import { assetUrl } from '@/lib/format';
 import { Education, Experience, PersonalInfo } from '@/types/content';
 
+const face2toonExperience: Experience = {
+  id: 'face2toon',
+  title: 'Full-Stack Developer',
+  company: 'Face2Toon',
+  date: 'Sep 2026 – Present · 2 mos',
+  employmentType: 'Part-time',
+  location: 'Remote',
+  logo: '/images/face2toon-logo.webp',
+  companyUrl: 'https://ai.face2toon.com/fr',
+  responsibilities: [
+    'Build and maintain Face2Toon, a platform that turns a few photos of a child into an AI-illustrated, personalised storybook (digital and printed).',
+    'Develop the book creation flow: photo upload, story, illustration style and language selection, with a free cover and first-chapter preview before checkout',
+    'Integrate Google generative AI to produce a consistent illustrated character across every page',
+    'Implement Stripe payments (card, Apple Pay, Google Pay, Klarna) and gift cards',
+    'Ship a multilingual experience in 5 languages (French, English, Spanish, Italian, Arabic) and seasonal editions like the Christmas book',
+  ],
+};
+
 const featuredExperience: Experience = {
   id: 'revixa-founder',
   title: 'Founder',
@@ -78,7 +96,7 @@ function CompanyName({ job }: { job: Experience }) {
 }
 
 const About = ({ personalDetails, experience, education }: AboutProps) => {
-  const jobs = [featuredExperience, ...experience];
+  const jobs = [face2toonExperience, featuredExperience, ...experience];
   const photo = assetUrl(personalDetails?.image?.fields?.file?.url);
 
   return (
