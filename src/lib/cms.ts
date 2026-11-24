@@ -46,6 +46,30 @@ function normalizeProject(item: {
   };
 }
 
+function localImage(url: string, width: number, height: number) {
+  return { fields: { file: { url, details: { image: { width, height } } } } };
+}
+
+// Projects not (yet) in Contentful. Shown before the Contentful entries.
+const localProjects: Project[] = [
+  {
+    id: 'local-face2toon',
+    title: 'Face2Toon',
+    slug: 'face2toon',
+    description:
+      'AI-personalised children’s storybooks: a few photos become an illustrated hero with their own name and story, delivered as a digital and printed book.',
+    link: 'https://ai.face2toon.com/fr',
+    tags: ['Next.js', 'Generative AI', 'Stripe', 'i18n', 'E-commerce'],
+    images: [
+      localImage('/images/projects/face2toon/home.jpg', 2160, 1350),
+      localImage('/images/projects/face2toon/library.jpg', 2160, 1350),
+      localImage('/images/projects/face2toon/book.jpg', 2160, 1350),
+      localImage('/images/projects/face2toon/giftcard.jpg', 2160, 1350),
+      localImage('/images/projects/face2toon/noel-couverture.jpg', 1000, 1000),
+    ],
+  },
+];
+
 export async function getProjects(): Promise<Project[]> {
   const response = await getContentfulClient().getEntries({
     content_type: 'project',
@@ -57,8 +81,12 @@ export async function getProjects(): Promise<Project[]> {
   );
   const uniqueById = Array.from(
     new Map(items.map((it) => [String(it.id), it])).values()
-  );
-  return uniqueById.reverse();
+  ).reverse();
+  const remoteSlugs = new Set(uniqueById.map((p) => p.slug));
+  return [
+    ...localProjects.filter((p) => !remoteSlugs.has(p.slug)),
+    ...uniqueById,
+  ];
 }
 
 export function findProject(
